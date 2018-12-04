@@ -1,4 +1,5 @@
 import { ListingModule } from './listing/listing.module';
+import { CoreModule } from './core/core.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -10,7 +11,8 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    ListingModule,
+    CoreModule,
+    ListingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
