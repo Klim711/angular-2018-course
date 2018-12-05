@@ -5,6 +5,7 @@ import { CoursesToolbarComponent } from './courses-toolbar/courses-toolbar.compo
 import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CoursesListItemComponent } from './courses-list-item/courses-list-item.component';
 import { SearchComponent } from './search/search.component';
+import { AddCourseComponent } from './add-course/add-course.component';
 
 @NgModule({
   declarations: [
