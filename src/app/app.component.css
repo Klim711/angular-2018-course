@@ -4,14 +4,6 @@
   height: 100%;
 }
 
-app-header {
-  height: 100px;
-}
-
 main {
   flex: 1;
-}
-
-app-footer {
-  height: 100px;
 }
