@@ -13,4 +13,11 @@ export class CoursesListItemComponent implements OnInit {
   ngOnInit() {
   }
 
+  editCourse() {
+    alert(`You are editing course ${this.courseItem.title}`);
+  }
+
+  deleteCourse() {
+    alert(`You are going to delete course ${this.courseItem.title}`);
+  }
 }

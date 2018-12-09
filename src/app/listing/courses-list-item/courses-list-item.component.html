@@ -1,3 +1,14 @@
-<p>
-  Courses List Item: {{courseItem.title}}
-</p>
+<div class="card course-item">
+  <div class="card-header">
+    <h4 class="course-title">{{courseItem.title}}</h4>
+    <span class="course-duration">{{courseItem.duration}}min</span>
+    <span class="course-date">{{courseItem.create_date}}</span>
+  </div>
+  <div class="card-body">
+    <p class="course-description">{{courseItem.description}}</p>
+    <div class="course-buttons">
+      <button (click)="editCourse()" type="button" class="btn btn-outline-dark edit-button btn-sm">Edit</button>
+      <button (click)="deleteCourse()" class="btn btn-dark btn-sm">Delete</button>
+    </div>
+  </div>
+</div>

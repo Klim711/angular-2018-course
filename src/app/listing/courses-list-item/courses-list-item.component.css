@@ -1,0 +1,34 @@
+.course-item {
+  margin-bottom: 10px;
+}
+
+.card-header {
+  display: flex;
+}
+
+.course-title {
+  flex: 1;
+}
+
+.card-body {
+  display: flex;
+}
+
+.course-date {
+  margin-left: 10px;
+  font-style: italic;
+}
+
+.course-description {
+  flex: 1;
+}
+
+.course-buttons {
+  display: flex;
+  width: 88px;
+  flex-direction: column;
+}
+
+.edit-button {
+  margin-bottom: 10px;
+}
