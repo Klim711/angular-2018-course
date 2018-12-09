@@ -6,6 +6,7 @@ import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CoursesListItemComponent } from './courses-list-item/courses-list-item.component';
 import { SearchComponent } from './search/search.component';
 import { AddCourseComponent } from './add-course/add-course.component';
+import { LoadMoreComponent } from './load-more/load-more.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { AddCourseComponent } from './add-course/add-course.component';
     CoursesListComponent,
     CoursesListItemComponent,
     SearchComponent,
-    AddCourseComponent
+    AddCourseComponent,
+    LoadMoreComponent
   ],
   imports: [
     CommonModule
