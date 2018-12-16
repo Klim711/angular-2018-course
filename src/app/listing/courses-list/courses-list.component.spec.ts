@@ -27,7 +27,22 @@ describe('CoursesListComponent', () => {
   });
 
   it('should create <app-courses-list-item> for each item in courses', () => {
-    const courses = [{ id: 1, }, { id: 1 }];
+    const courses = [
+      {
+        id: 1,
+        title: 'A',
+        create_date: '1/1/2011',
+        duration: 123,
+        description: 'AAA',
+      },
+      {
+        id: 2,
+        title: 'B',
+        create_date: '1/1/2011',
+        duration: 123,
+        description: 'BBB',
+      },
+    ];
     component.courses = courses;
 
     fixture.detectChanges();
