@@ -1,3 +1,24 @@
 :host {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
   display: inline-block;
+  border-left: solid 15px black;
+  border-right: solid 15px black;
+  border-top: solid 15px white;
+  border-bottom: solid 15px white;
+  margin-top: 5px;
+}
+
+h2 {
+  display: inline-block;
+  margin: 0 0 0 10px;
+}
+
+a {
+  color: black;
 }

@@ -14,4 +14,7 @@ export class UserPanelComponent implements OnInit {
   ngOnInit() {
   }
 
+  logOff() {
+    alert('You are logged off');
+  }
 }
