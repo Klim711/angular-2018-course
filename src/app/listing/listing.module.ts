@@ -8,6 +8,7 @@ import { SearchComponent } from './search/search.component';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { LoadMoreComponent } from './load-more/load-more.component';
 import { CourseClassPipe } from './pipes/course-class.pipe';
+import { NoCoursesComponent } from './no-courses/no-courses.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CourseClassPipe } from './pipes/course-class.pipe';
     SearchComponent,
     AddCourseComponent,
     LoadMoreComponent,
-    CourseClassPipe
+    CourseClassPipe,
+    NoCoursesComponent
   ],
   imports: [
     CommonModule
