@@ -15,7 +15,7 @@ export class ListingPageComponent implements OnInit {
     this.courses = [
       {
         id: 1,
-        title: 'A',
+        title: 'a',
         create_date: '12/20/2018',
         duration: 123,
         description: 'AAA',
@@ -23,7 +23,7 @@ export class ListingPageComponent implements OnInit {
       },
       {
         id: 2,
-        title: 'B',
+        title: 'b',
         create_date: '1/1/2019',
         duration: 123,
         description: 'BBB',
@@ -31,7 +31,7 @@ export class ListingPageComponent implements OnInit {
       },
       {
         id: 3,
-        title: 'C',
+        title: 'c',
         create_date: '1/1/2020',
         duration: 123,
         description: 'CCC',
