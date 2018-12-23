@@ -4,4 +4,5 @@ export interface CoursesListItem {
   create_date: string;
   duration: number;
   description: string;
+  rating: number | null;
 }

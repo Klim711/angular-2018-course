@@ -1,6 +1,9 @@
 <div class="card course-item">
   <div class="card-header {{courseItem.create_date | courseClass}}">
-    <h4 class="course-title">{{courseItem.title}}</h4>
+    <div class="course-title">
+      <h4>{{courseItem.title}}</h4>
+      <span *ngIf="courseItem.rating"><i class="far fa-star"></i>x{{courseItem.rating}}</span>
+    </div>
     <span class="course-duration">{{courseItem.duration}}min</span>
     <span class="course-date">{{courseItem.create_date}}</span>
   </div>

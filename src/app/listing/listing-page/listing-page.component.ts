@@ -19,6 +19,7 @@ export class ListingPageComponent implements OnInit {
         create_date: '12/20/2018',
         duration: 123,
         description: 'AAA',
+        rating: 9,
       },
       {
         id: 2,
@@ -26,6 +27,7 @@ export class ListingPageComponent implements OnInit {
         create_date: '1/1/2019',
         duration: 123,
         description: 'BBB',
+        rating: 7,
       },
       {
         id: 3,
@@ -33,6 +35,7 @@ export class ListingPageComponent implements OnInit {
         create_date: '1/1/2020',
         duration: 123,
         description: 'CCC',
+        rating: 4,
       },
       {
         id: 4,
@@ -40,6 +43,7 @@ export class ListingPageComponent implements OnInit {
         create_date: '1/1/2011',
         duration: 123,
         description: 'DDD',
+        rating: null,
       },
       {
         id: 5,
@@ -47,6 +51,7 @@ export class ListingPageComponent implements OnInit {
         create_date: '1/1/2011',
         duration: 123,
         description: 'EEE',
+        rating: 10,
       },
       {
         id: 6,
@@ -54,6 +59,7 @@ export class ListingPageComponent implements OnInit {
         create_date: '1/1/2011',
         duration: 123,
         description: 'FFF',
+        rating: 6,
       },
     ];
   }
