@@ -1,3 +1,3 @@
 <app-courses-toolbar></app-courses-toolbar>
-<app-courses-list *ngIf="courses && courses.length" [courses]='courses | sortByDate'></app-courses-list>
+<app-courses-list *ngIf="courses && courses.length" [courses]='courses | sortByDate | filterBySearch:searchValue'></app-courses-list>
 <app-no-courses *ngIf="!courses || !courses.length"></app-no-courses>

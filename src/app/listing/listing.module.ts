@@ -11,6 +11,7 @@ import { CourseClassPipe } from './pipes/course-class.pipe';
 import { NoCoursesComponent } from './no-courses/no-courses.component';
 import { CourseDurationPipe } from './pipes/course-duration.pipe';
 import { SortByDatePipe } from './pipes/sort-by-date.pipe';
+import { FilterBySearchPipe } from './pipes/filter-by-search.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SortByDatePipe } from './pipes/sort-by-date.pipe';
     CourseClassPipe,
     NoCoursesComponent,
     CourseDurationPipe,
-    SortByDatePipe
+    SortByDatePipe,
+    FilterBySearchPipe
   ],
   imports: [
     CommonModule
