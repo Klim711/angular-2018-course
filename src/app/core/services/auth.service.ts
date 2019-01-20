@@ -10,28 +10,22 @@ export class AuthService {
 
   constructor() { }
 
-  public logIn(email: string, password: string) {
-    const userProfile = { // TODO: add model for userProfile
-      email,
-      password,
-      token: Number(new Date()),
-    };
-
-    localStorage.setItem(`users.${email}`, JSON.stringify(userProfile));
+  public logIn(user: UserEntity) {
+    localStorage.setItem(`users.${user.email}`, JSON.stringify(user));
   }
 
   public logOut(email: string) {
     localStorage.removeItem(`users.${email}`);
   }
 
-  public isAuthenticated(email: string): boolean {
-    const userProfile = JSON.parse(localStorage.getItem(`users.${email}`));
-
-    if (!userProfile || this._isTokenExpired(userProfile.token)) {
+  public isAuthenticated(user: UserEntity): boolean {
+    if (!user) {
       return false;
-    } else {
-      return true;
     }
+    const userProfile = JSON.parse(
+      localStorage.getItem(`users.${user.email}`));
+
+    return userProfile && !this._isTokenExpired(userProfile.token);
   }
 
   private _isTokenExpired(token: number):boolean {
@@ -39,12 +33,18 @@ export class AuthService {
   }
 
   public getUserInfo(): UserEntity {
-    // TODO: return user info based on some param
-    return {
-      id: 711,
-      firstName: 'Klim',
-      lastName: 'Shuplenkov',
-      email: 'klim@example.com',
-    };
+    if (window.location.pathname === '/login') {
+      return null;
+    } else {
+      const user = {
+        id: 711,
+        firstName: 'Klim',
+        lastName: 'Shuplenkov',
+        email: 'klim@example.com',
+        token: Number(new Date()),
+      };
+      this.logIn(user);
+      return user;
+    }
   }
 }
