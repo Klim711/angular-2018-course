@@ -7,6 +7,11 @@ import { CoursesListItemComponent } from './courses-list-item/courses-list-item.
 import { SearchComponent } from './search/search.component';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { LoadMoreComponent } from './load-more/load-more.component';
+import { CourseClassPipe } from './pipes/course-class.pipe';
+import { NoCoursesComponent } from './no-courses/no-courses.component';
+import { CourseDurationPipe } from './pipes/course-duration.pipe';
+import { SortByDatePipe } from './pipes/sort-by-date.pipe';
+import { FilterBySearchPipe } from './pipes/filter-by-search.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +21,12 @@ import { LoadMoreComponent } from './load-more/load-more.component';
     CoursesListItemComponent,
     SearchComponent,
     AddCourseComponent,
-    LoadMoreComponent
+    LoadMoreComponent,
+    CourseClassPipe,
+    NoCoursesComponent,
+    CourseDurationPipe,
+    SortByDatePipe,
+    FilterBySearchPipe
   ],
   imports: [
     CommonModule
