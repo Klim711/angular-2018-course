@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UserEntity } from '../user-entity';
 
 const ONE_HOUR = Number('6e+4');
 
@@ -37,7 +38,13 @@ export class AuthService {
     return (Number(new Date()) - token) > ONE_HOUR;
   }
 
-  public getUserInfo() {
-    // TODO
+  public getUserInfo(): UserEntity {
+    // TODO: return user info based on some param
+    return {
+      id: 711,
+      firstName: 'Klim',
+      lastName: 'Shuplenkov',
+      email: 'klim@example.com',
+    };
   }
 }
