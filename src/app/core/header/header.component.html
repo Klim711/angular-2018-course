@@ -1,4 +1,4 @@
 <header class="container">
   <app-logo></app-logo>
-  <app-user-panel [user]="user"></app-user-panel>
+  <app-user-panel *ngIf="user" [user]="user"></app-user-panel>
 </header>
