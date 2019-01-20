@@ -1,5 +1,6 @@
 import { CoursesListItem } from './../courses-list-item.model';
 import { Component, OnInit, Input } from '@angular/core';
+import { CoursesService } from '../services/courses.service';
 
 @Component({
   selector: 'app-courses-list-item',
@@ -8,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CoursesListItemComponent implements OnInit {
   @Input() public courseItem: CoursesListItem;
-  constructor() { }
+  constructor(private coursesService: CoursesService) { }
 
   ngOnInit() {
   }
@@ -18,6 +19,8 @@ export class CoursesListItemComponent implements OnInit {
   }
 
   deleteCourse() {
-    alert(`You are going to delete course ${this.courseItem.title}`);
+    if (confirm(`You are going to delete course ${this.courseItem.title}`)) {
+      this.coursesService.deleteCourse(this.courseItem.id);
+    }
   }
 }

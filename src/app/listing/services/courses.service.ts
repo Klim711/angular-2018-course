@@ -60,4 +60,8 @@ export class CoursesService {
   public getCoursesList(): CoursesListItem[] {
     return this.coursesList;
   }
+
+  public deleteCourse(id: Number) {
+    this.coursesList = this.coursesList.filter((item) => item.id !== id);
+  }
 }
