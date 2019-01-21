@@ -4,6 +4,7 @@ import { UserPanelComponent } from './user-panel.component';
 import { UserEntity } from './../user-entity';
 import { By } from '@angular/platform-browser';
 import { Component, DebugElement } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   template: `<app-user-panel [user]="user"></app-user-panel>`
@@ -13,22 +14,27 @@ class TestHostComponent {
     id: 1,
     firstName: 'name1',
     lastName: 'name2',
+    email: 'email',
+    token: 123,
   };
 }
 
 describe('UserPanelComponent', () => {
   let testHost: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
+  let authService: AuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ UserPanelComponent, TestHostComponent ],
+      providers: [AuthService],
     });
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestHostComponent);
     testHost = fixture.componentInstance;
+    authService = TestBed.get(AuthService);
 
     fixture.detectChanges();
   });
@@ -46,12 +52,27 @@ describe('UserPanelComponent', () => {
     expect(span.textContent).toBe(`${user.firstName} ${user.lastName}`);
   });
 
-  it('should logOff on button click', () => {
-    spyOn(window, 'alert');
+  describe('on button click', () => {
+    let button: DebugElement;
 
-    const button = fixture.debugElement.query(By.css('button'));
-    button.triggerEventHandler('click', null);
+    beforeEach(() => {
+      spyOn(window, 'alert');
+      spyOn(authService, 'logOut');
 
-    expect(window.alert).toHaveBeenCalledWith('You are logged off');
+      button = fixture.debugElement.query(By.css('button'));
+    });
+
+    it('should logOff on button click', () => {
+      button.triggerEventHandler('click', null);
+
+      expect(window.alert).toHaveBeenCalledWith('You are logged off');
+    });
+
+    it('should log out current user', () => {
+      button.triggerEventHandler('click', null);
+      const user = testHost.user;
+
+      expect(authService.logOut).toHaveBeenCalledWith(user.email);
+    });
   });
 });
