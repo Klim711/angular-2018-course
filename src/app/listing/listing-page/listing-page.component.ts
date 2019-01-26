@@ -14,7 +14,9 @@ export class ListingPageComponent implements OnInit {
   constructor(private coursesService: CoursesService) { }
 
   ngOnInit() {
-    // TODO: add observable
+    this.coursesService.coursesListUpdated.subscribe(() => {
+      this.courses = this.coursesService.getCoursesList();
+    })
     this.courses = this.coursesService.getCoursesList();
   }
 

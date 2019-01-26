@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { CoursesListItem } from '../courses-list-item.model';
 
 @Injectable({
@@ -55,6 +55,7 @@ export class CoursesService {
       rating: 6,
     },
   ];
+  public coursesListUpdated:EventEmitter<any> = new EventEmitter();
   constructor() { }
 
   public getCoursesList(): CoursesListItem[] {
@@ -63,5 +64,7 @@ export class CoursesService {
 
   public deleteCourse(id: Number) {
     this.coursesList = this.coursesList.filter((item) => item.id !== id);
+
+    this.coursesListUpdated.emit();
   }
 }
