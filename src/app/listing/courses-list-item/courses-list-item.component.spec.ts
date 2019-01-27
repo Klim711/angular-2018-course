@@ -6,7 +6,7 @@ import { By } from '@angular/platform-browser';
 import { Component, DebugElement } from '@angular/core';
 import { CoursesService } from '../services/courses.service';
 import { CourseClassPipe } from '../pipes/course-class.pipe';
-import { CourseDurationPipe } from '../pipes/course-duration.pipe';
+import { CourseDurationPipe } from '../../shared/pipes/course-duration.pipe';
 import { DatePipe } from '@angular/common';
 
 @Component({
