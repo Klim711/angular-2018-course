@@ -1,0 +1,31 @@
+<form #courseForm="ngForm">
+  <div class="form-group">
+    <label for="courseTitle">Title</label>
+    <input
+      type="text" id="courseTitle" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="courseDescription">Description</label>
+    <textarea
+      class="form-control" id="courseDescription" rows="4"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="courseDate">Date</label>
+    <input
+      type="date" id="courseDate" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="courseDuration">Duration</label>
+    <input
+      type="number" id="courseDuration" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="courseAuthors">Authors</label>
+    <input type="text" id="courseAuthors" class="form-control">
+  </div>
+
+  <div class="form-buttons">
+    <button (click)="save()" class="btn btn-dark save-button" type="button">Save</button>
+    <button (click)="cancel()" class="btn btn-outline-secondary cancel-button" type="button">Cancel</button>
+  </div>
+</form>
