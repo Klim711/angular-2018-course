@@ -3,10 +3,12 @@ import { ListingPageComponent } from './listing/listing-page/listing-page.compon
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes  } from '@angular/router';
 import { LoginPageComponent } from './login/login-page/login-page.component';
+import { CoursePageComponent } from './course/course-page/course-page.component';
 
 const ROUTES: Routes = [
   { path: 'listing', component: ListingPageComponent },
   { path: 'login', component: LoginPageComponent },
+  { path: 'course', component: CoursePageComponent },
   { path: '', redirectTo: '/listing', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];
