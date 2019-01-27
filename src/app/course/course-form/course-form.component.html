@@ -1,22 +1,22 @@
 <form #courseForm="ngForm">
   <div class="form-group">
     <label for="courseTitle">Title</label>
-    <input
+    <input [(ngModel)]="title" name="courseTitle"
       type="text" id="courseTitle" class="form-control">
   </div>
   <div class="form-group">
     <label for="courseDescription">Description</label>
-    <textarea
+    <textarea [(ngModel)]="description" name="courseDescription"
       class="form-control" id="courseDescription" rows="4"></textarea>
   </div>
   <div class="form-group">
     <label for="courseDate">Date</label>
-    <input
+    <input [(ngModel)]="date" name="courseDate"
       type="date" id="courseDate" class="form-control">
   </div>
   <div class="form-group">
     <label for="courseDuration">Duration</label>
-    <input
+    <input [(ngModel)]="duration" name="courseDuration"
       type="number" id="courseDuration" class="form-control">
   </div>
   <div class="form-group">
