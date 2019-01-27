@@ -104,7 +104,7 @@ describe('CoursesListItemComponent', () => {
       button = fixture.debugElement.query(By.css('.delete-button'));
       spyOn(coursesService, 'deleteCourse');
     });
-  
+
     it('should delete course if user confirmed it', () => {
       spyOn(window, 'confirm').and.returnValue(true);
 

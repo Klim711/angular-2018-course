@@ -1,57 +1,64 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
 
 import { CoursesListComponent } from './courses-list.component';
+import { CoursesListItem } from '../courses-list-item.model';
 
+@Component({
+  template: `<app-courses-list [courses]="courses"></app-courses-list>`
+})
+class TestHostComponent {
+  public courses: CoursesListItem[] = [
+    {
+      id: 1,
+      title: 'A',
+      create_date: new Date('1/1/2011'),
+      duration: 123,
+      description: 'AAA',
+      rating: 321,
+    },
+    {
+      id: 2,
+      title: 'B',
+      create_date: new Date('1/1/2011'),
+      duration: 123,
+      description: 'BBB',
+      rating: 321,
+    }
+  ];
+}
 describe('CoursesListComponent', () => {
-  let component: CoursesListComponent;
-  let fixture: ComponentFixture<CoursesListComponent>;
+  let testHost: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoursesListComponent ],
+      declarations: [
+        CoursesListComponent,
+        TestHostComponent,
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CoursesListComponent);
-    component = fixture.componentInstance;
+    fixture = TestBed.createComponent(TestHostComponent);
+    testHost = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(testHost).toBeTruthy();
   });
 
   it('should create <app-courses-list-item> for each item in courses', () => {
-    const courses = [
-      {
-        id: 1,
-        title: 'A',
-        create_date: new Date('1/1/2011'),
-        duration: 123,
-        description: 'AAA',
-        rating: 321,
-      },
-      {
-        id: 2,
-        title: 'B',
-        create_date: new Date('1/1/2011'),
-        duration: 123,
-        description: 'BBB',
-        rating: 321,
-      },
-    ];
-    component.courses = courses;
-
     fixture.detectChanges();
 
     const courseItems = fixture.debugElement
       .queryAll(By.css('app-courses-list-item'));
 
-    expect(courseItems.length).toBe(courses.length);
+    expect(courseItems.length).toBe(testHost.courses.length);
   });
 });
