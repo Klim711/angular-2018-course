@@ -31,16 +31,18 @@ describe('CoursesListComponent', () => {
       {
         id: 1,
         title: 'A',
-        create_date: '1/1/2011',
+        create_date: new Date('1/1/2011'),
         duration: 123,
         description: 'AAA',
+        rating: 321,
       },
       {
         id: 2,
         title: 'B',
-        create_date: '1/1/2011',
+        create_date: new Date('1/1/2011'),
         duration: 123,
         description: 'BBB',
+        rating: 321,
       },
     ];
     component.courses = courses;

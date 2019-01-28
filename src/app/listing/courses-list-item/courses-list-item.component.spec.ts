@@ -4,6 +4,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CoursesListItemComponent } from './courses-list-item.component';
 import { By } from '@angular/platform-browser';
 import { Component, DebugElement } from '@angular/core';
+import { CoursesService } from '../services/courses.service';
+import { CourseClassPipe } from '../pipes/course-class.pipe';
+import { CourseDurationPipe } from '../pipes/course-duration.pipe';
+import { DatePipe } from '@angular/common';
 
 @Component({
   template: `<app-courses-list-item [courseItem]="course"></app-courses-list-item>`
@@ -11,20 +15,28 @@ import { Component, DebugElement } from '@angular/core';
 class TestHostComponent {
   public course: CoursesListItem = {
     id: 1,
-    title: 'A',
-    create_date: '1/1/2011',
+    title: 'some title',
+    create_date: new Date('1/1/2011'),
     duration: 123,
     description: 'AAA',
+    rating: 123,
   };
 }
 describe('CoursesListItemComponent', () => {
   let testHost: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
   let course: CoursesListItem;
+  let coursesService: CoursesService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoursesListItemComponent, TestHostComponent ]
+      declarations: [
+        CoursesListItemComponent,
+        TestHostComponent,
+        CourseClassPipe,
+        CourseDurationPipe,
+      ],
+      providers: [CoursesService],
     })
     .compileComponents();
   }));
@@ -34,6 +46,7 @@ describe('CoursesListItemComponent', () => {
     testHost = fixture.componentInstance;
     fixture.detectChanges();
     course = testHost.course;
+    coursesService = TestBed.get(CoursesService);
   });
 
   it('should create', () => {
@@ -43,23 +56,26 @@ describe('CoursesListItemComponent', () => {
   describe('should display', () => {
     it('course title', () => {
       const element = fixture.debugElement
-        .query(By.css('.course-title')).nativeElement;
+        .query(By.css('.course-title h4')).nativeElement;
 
-      expect(element.textContent).toBe(course.title);
+      expect(element.textContent).toBe(course.title.toUpperCase());
     });
 
     it('course duration', () => {
       const element = fixture.debugElement
         .query(By.css('.course-duration')).nativeElement;
 
-      expect(element.textContent).toBe(`${course.duration}min`);
+      expect(element.textContent).toBe(
+        CourseDurationPipe.prototype.transform(course.duration));
     });
 
     it('course create_date', () => {
       const element = fixture.debugElement
         .query(By.css('.course-date')).nativeElement;
+      const datePipe = new DatePipe('en');
 
-      expect(element.textContent).toBe(course.create_date);
+      expect(element.textContent).toBe(
+        datePipe.transform(course.create_date, 'MM.dd.yyyy'));
     });
 
     it('course description', () => {
@@ -81,14 +97,21 @@ describe('CoursesListItemComponent', () => {
       `You are editing course ${course.title}`);
   });
 
-  it('should delete course when delete-button clicked', () => {
-    spyOn(window, 'alert');
-    const button = fixture.debugElement
-      .query(By.css('.delete-button'));
+  describe('on delete button click', () => {
+    let button: DebugElement;
 
-    button.triggerEventHandler('click', null);
+    beforeEach(() => {
+      button = fixture.debugElement.query(By.css('.delete-button'));
+      spyOn(coursesService, 'deleteCourse');
+    });
+  
+    it('should delete course if user confirmed it', () => {
+      spyOn(window, 'confirm').and.returnValue(true);
 
-    expect(window.alert).toHaveBeenCalledWith(
-      `You are going to delete course ${course.title}`);
+      button.triggerEventHandler('click', null);
+
+      expect(coursesService.deleteCourse).toHaveBeenCalledWith(
+        course.id);
+    });
   });
 });
