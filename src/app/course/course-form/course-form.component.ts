@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CoursesService } from 'src/app/listing/services/courses.service';
 import { CoursesListItem } from 'src/app/listing/courses-list-item.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-course-form',
@@ -38,7 +39,7 @@ export class CourseFormComponent implements OnInit {
   setFormFields(course: CoursesListItem) {
     this.title = course.title;
     this.description = course.description;
-    this.date = course.create_date;
+    this.date = moment(course.create_date).format('YYYY-MM-DD');
     this.duration = String(course.duration);
   }
 
