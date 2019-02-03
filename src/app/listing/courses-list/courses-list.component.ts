@@ -1,4 +1,4 @@
-import { Course } from '../course.interface';
+import { Course } from '../../shared/interfaces/course.interface';
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({

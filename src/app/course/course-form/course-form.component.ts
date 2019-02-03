@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CoursesService } from 'src/app/listing/services/courses.service';
-import { Course } from 'src/app/listing/course.interface';
+import { Course } from 'src/app/shared/interfaces/course.interface';
 import * as moment from 'moment';
 
 @Component({

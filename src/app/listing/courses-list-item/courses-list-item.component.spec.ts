@@ -1,4 +1,4 @@
-import { Course } from '../course.interface';
+import { Course } from '../../shared/interfaces/course.interface';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesListItemComponent } from './courses-list-item.component';

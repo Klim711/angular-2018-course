@@ -1,4 +1,4 @@
-import { Course } from '../course.interface';
+import { Course } from '../../shared/interfaces/course.interface';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({

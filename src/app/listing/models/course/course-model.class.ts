@@ -1,4 +1,4 @@
-import { Course } from '../../../listing/course.interface';
+import { Course } from '../../../shared/interfaces/course.interface';
 
 export class CourseModel implements Course {
   public id: number;

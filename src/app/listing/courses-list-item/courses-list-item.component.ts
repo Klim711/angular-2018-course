@@ -1,4 +1,4 @@
-import { Course } from '../course.interface';
+import { Course } from '../../shared/interfaces/course.interface';
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CoursesService } from '../services/courses.service';
 import { Router } from '@angular/router';

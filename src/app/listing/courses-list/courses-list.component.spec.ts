@@ -3,7 +3,7 @@ import { By } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
 
 import { CoursesListComponent } from './courses-list.component';
-import { Course } from '../course.interface';
+import { Course } from '../../shared/interfaces/course.interface';
 
 @Component({
   template: `<app-courses-list [courses]="courses"></app-courses-list>`

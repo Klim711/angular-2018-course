@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Course } from '../course.interface';
+import { Course } from '../../shared/interfaces/course.interface';
 import { CourseModel } from '../models/course/course-model.class';
 
 @Injectable({
