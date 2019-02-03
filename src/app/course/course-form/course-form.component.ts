@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from 'src/app/listing/services/courses.service';
 import { Course } from 'src/app/shared/interfaces/course.interface';
 import * as moment from 'moment';
@@ -18,6 +18,7 @@ export class CourseFormComponent implements OnInit {
 
   constructor(
     private coursesService: CoursesService,
+    private router: Router,
     private route: ActivatedRoute
   ) {}
 
@@ -54,18 +55,13 @@ export class CourseFormComponent implements OnInit {
       this.coursesService.editCourseItem(this.originalCourse.id, content);
     } else {
       this.coursesService.createCourseItem(content);
-
-      this.originalCourse = null;
-      this.resetForm();
     }
+
+    this.router.navigate(['/listing']);
   }
 
   cancel() {
-    if (this.originalCourse) {
-      this.setFormFields(this.originalCourse);
-    } else {
-      this.resetForm();
-    }
+    this.router.navigate(['/listing']);
   }
 
   resetForm() {
