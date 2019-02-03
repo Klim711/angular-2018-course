@@ -11,8 +11,8 @@ import { AuthService } from '../services/auth.service';
 })
 class TestHostComponent {
   public user: User = {
-    id: 1,
     firstName: 'name1',
+    password: 'password',
     lastName: 'name2',
     email: 'email',
     token: 123,
@@ -70,9 +70,8 @@ describe('UserPanelComponent', () => {
 
     it('should log out current user', () => {
       button.triggerEventHandler('click', null);
-      const user = testHost.user;
 
-      expect(authService.logOut).toHaveBeenCalledWith(user.email);
+      expect(authService.logOut).toHaveBeenCalled();
     });
   });
 });

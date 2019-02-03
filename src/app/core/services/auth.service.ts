@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { User } from '../user.interface';
 import { UserModel } from '../models/user-model.class';
 
@@ -8,23 +8,30 @@ const ONE_HOUR = Number('3.6e+6');
   providedIn: 'root'
 })
 export class AuthService {
+  public authUpdated:EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
-  public logIn(user: User) {
-    localStorage.setItem(`users.${user.email}`, JSON.stringify(user));
+  public logIn(userContent: {email: string, password: string}) {
+    const token = Number(new Date());
+    const user = new UserModel({
+      ...userContent,
+      token,
+    });
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    this.authUpdated.emit();
   }
 
-  public logOut(email: string) {
-    localStorage.removeItem(`users.${email}`);
+  public logOut() {
+    localStorage.removeItem('currentUser');
+    this.authUpdated.emit();
   }
 
   public isAuthenticated(user: User): boolean {
     if (!user) {
       return false;
     }
-    const userProfile = JSON.parse(
-      localStorage.getItem(`users.${user.email}`));
+    const userProfile = this.getUserInfo();
 
     return userProfile && !this._isTokenExpired(userProfile.token);
   }
@@ -34,18 +41,6 @@ export class AuthService {
   }
 
   public getUserInfo(): User {
-    if (window.location.pathname === '/login') {
-      return null;
-    } else {
-      const user = new UserModel({
-        id: 711,
-        firstName: 'Klim',
-        lastName: 'Shuplenkov',
-        email: 'klim@example.com',
-        token: Number(new Date()),
-      });
-      this.logIn(user);
-      return user;
-    }
+    return JSON.parse(localStorage.getItem('currentUser'));
   }
 }
