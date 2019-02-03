@@ -8,7 +8,14 @@ export class CourseModel implements Course {
   public description: string = 'description';
   public rating: number | null = null;
 
-  constructor(content: {id: number}) {
+  constructor(content: {
+    id: number,
+    title?: string,
+    create_date?: Date,
+    duration?: number,
+    description?: string,
+    rating?: number,
+  }) {
     Object.assign(this, content);
   }
 }
