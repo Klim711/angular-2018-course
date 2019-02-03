@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserEntity } from '../user-entity';
 
-const ONE_HOUR = Number('6e+4');
+const ONE_HOUR = Number('3.6e+6');
 
 @Injectable({
   providedIn: 'root'
