@@ -8,6 +8,7 @@ import { CoursePageComponent } from './course/course-page/course-page.component'
 const ROUTES: Routes = [
   { path: 'listing', component: ListingPageComponent },
   { path: 'login', component: LoginPageComponent },
+  { path: 'course/:id', component: CoursePageComponent },
   { path: 'course', component: CoursePageComponent },
   { path: '', redirectTo: '/listing', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },

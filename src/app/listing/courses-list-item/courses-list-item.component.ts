@@ -1,6 +1,7 @@
 import { CoursesListItem } from './../courses-list-item.model';
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CoursesService } from '../services/courses.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses-list-item',
@@ -10,13 +11,16 @@ import { CoursesService } from '../services/courses.service';
 })
 export class CoursesListItemComponent implements OnInit {
   @Input() public courseItem: CoursesListItem;
-  constructor(private coursesService: CoursesService) { }
+  constructor(
+    private coursesService: CoursesService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
   }
 
   editCourse() {
-    alert(`You are editing course ${this.courseItem.title}`);
+    this.router.navigate(['/course', this.courseItem.id]);
   }
 
   deleteCourse() {
