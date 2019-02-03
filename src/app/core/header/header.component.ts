@@ -15,10 +15,11 @@ export class HeaderComponent implements OnInit {
     this.authService.authUpdated.subscribe(() => {
       this.user = this.authService.getUserInfo();
     });
+    this.user = this.authService.getUserInfo();
   }
 
   isAuthenticated():boolean {
-    return this.authService.isAuthenticated(this.user);
+    return this.authService.isAuthenticated();
   }
 
 }

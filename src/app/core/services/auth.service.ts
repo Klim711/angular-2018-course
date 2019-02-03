@@ -27,7 +27,8 @@ export class AuthService {
     this.authUpdated.emit();
   }
 
-  public isAuthenticated(user: User): boolean {
+  public isAuthenticated(): boolean {
+    const user = this.getUserInfo();
     if (!user) {
       return false;
     }
