@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CoursesService } from 'src/app/listing/services/courses.service';
+import { CoursesListItem } from 'src/app/listing/courses-list-item.model';
 
 @Component({
   selector: 'app-course-form',
@@ -6,14 +9,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./course-form.component.css']
 })
 export class CourseFormComponent implements OnInit {
+  private originalCourse: CoursesListItem = null;
   public title: String = '';
   public description: String = '';
   public date: String = '';
   public duration: String = '';
 
-  constructor() { }
+  constructor(
+    private coursesService: CoursesService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
+    this.route.params.subscribe((data) => {
+      if (data.id) {
+        const courseItem = this.coursesService.getCourseItem(Number(data.id));
+        this.originalCourse = courseItem;
+
+        this.setFormFields(courseItem);
+      } else {
+        this.originalCourse = null;
+
+        this.resetForm();
+      }
+    });
+  }
+
+  setFormFields(course: CoursesListItem) {
+    this.title = course.title;
+    this.description = course.description;
+    this.date = course.create_date;
+    this.duration = String(course.duration);
   }
 
   save() {
@@ -27,6 +53,14 @@ export class CourseFormComponent implements OnInit {
   }
 
   cancel() {
+    if (this.originalCourse) {
+      this.setFormFields(this.originalCourse);
+    } else {
+      this.resetForm();
+    }
+  }
+
+  resetForm() {
     this.title = '';
     this.description = '';
     this.date = '';

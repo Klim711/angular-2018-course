@@ -62,6 +62,10 @@ export class CoursesService {
     return this.coursesList;
   }
 
+  public getCourseItem(id: Number): CoursesListItem {
+    return this.coursesList.find((course) => course.id === id);
+  }
+
   public deleteCourse(id: Number) {
     this.coursesList = this.coursesList.filter((item) => item.id !== id);
 
