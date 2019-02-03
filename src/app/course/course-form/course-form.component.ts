@@ -11,10 +11,10 @@ import * as moment from 'moment';
 })
 export class CourseFormComponent implements OnInit {
   private originalCourse: CoursesListItem = null;
-  public title: String = '';
-  public description: String = '';
-  public date: String = '';
-  public duration: String = '';
+  public title: string = '';
+  public description: string = '';
+  public date: string = '';
+  public duration: string = '';
 
   constructor(
     private coursesService: CoursesService,
@@ -44,13 +44,20 @@ export class CourseFormComponent implements OnInit {
   }
 
   save() {
-    alert(`
-      Following course was saved:
-      Title: ${this.title}
-      Description: ${this.description}
-      Date: ${this.date}
-      Duration: ${this.duration}
-    `);
+    const content = {
+      title: this.title,
+      description: this.description,
+      create_date: new Date(this.date),
+      duration: this.duration,
+    };
+    if (this.originalCourse) {
+      this.coursesService.editCourseItem(this.originalCourse.id, content);
+    } else {
+      this.coursesService.createCourseItem(content);
+
+      this.originalCourse = null;
+      this.resetForm();
+    }
   }
 
   cancel() {

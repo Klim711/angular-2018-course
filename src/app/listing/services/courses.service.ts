@@ -62,11 +62,37 @@ export class CoursesService {
     return this.coursesList;
   }
 
-  public getCourseItem(id: Number): CoursesListItem {
+  public getCourseItem(id: number): CoursesListItem {
     return this.coursesList.find((course) => course.id === id);
   }
 
-  public deleteCourse(id: Number) {
+  public editCourseItem(id: number, content: Object) {
+    const courses = this.coursesList;
+    const indexOfEditedCourse = courses
+      .findIndex((course) => course.id === id);
+
+    const modifiedCourse = Object.assign({},
+        courses[indexOfEditedCourse], content);
+
+    this.coursesList = [
+      ...courses.slice(0, indexOfEditedCourse),
+      modifiedCourse,
+      ...courses.slice(indexOfEditedCourse + 1, courses.length),
+    ];
+  }
+
+  public createCourseItem(content: Object) {
+    const id = this.coursesList.length;
+
+    const newCourse = Object.assign({id}, content);
+
+    this.coursesList = [
+      ...this.coursesList,
+      newCourse,
+    ];
+  }
+
+  public deleteCourse(id: number) {
     this.coursesList = this.coursesList.filter((item) => item.id !== id);
 
     this.coursesListUpdated.emit();
