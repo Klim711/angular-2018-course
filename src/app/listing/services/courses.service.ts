@@ -1,11 +1,11 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { CoursesListItem } from '../courses-list-item.model';
+import { Course } from '../course.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
-  private coursesList: CoursesListItem[] = [
+  private coursesList: Course[] = [
     {
       id: 1,
       title: 'a',
@@ -58,11 +58,11 @@ export class CoursesService {
   public coursesListUpdated:EventEmitter<any> = new EventEmitter();
   constructor() { }
 
-  public getCoursesList(): CoursesListItem[] {
+  public getCoursesList(): Course[] {
     return this.coursesList;
   }
 
-  public getCourseItem(id: number): CoursesListItem {
+  public getCourseItem(id: number): Course {
     return this.coursesList.find((course) => course.id === id);
   }
 

@@ -1,4 +1,4 @@
-import { CoursesListItem } from './../courses-list-item.model';
+import { Course } from '../course.interface';
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CoursesService } from '../services/courses.service';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoursesListItemComponent implements OnInit {
-  @Input() public courseItem: CoursesListItem;
+  @Input() public courseItem:Course;
   constructor(
     private coursesService: CoursesService,
     private router: Router

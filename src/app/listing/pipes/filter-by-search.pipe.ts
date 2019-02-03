@@ -1,4 +1,4 @@
-import { CoursesListItem } from './../courses-list-item.model';
+import { Course } from '../course.interface';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterBySearchPipe implements PipeTransform {
 
-  transform(courses: CoursesListItem[], searchValue: string): CoursesListItem[] {
+  transform(courses: Course[], searchValue: string): Course[] {
     if (!searchValue) {
       return Array.from(courses);
     }

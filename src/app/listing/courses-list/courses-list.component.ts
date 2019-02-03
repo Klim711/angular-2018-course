@@ -1,4 +1,4 @@
-import { CoursesListItem } from './../courses-list-item.model';
+import { Course } from '../course.interface';
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
@@ -8,7 +8,7 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoursesListComponent implements OnInit {
-  @Input() public courses: CoursesListItem[];
+  @Input() public courses: Course[];
 
   constructor() { }
 
