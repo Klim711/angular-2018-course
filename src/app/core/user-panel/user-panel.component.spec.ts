@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserPanelComponent } from './user-panel.component';
-import { UserEntity } from './../user-entity';
+import { User } from '../user.interface';
 import { By } from '@angular/platform-browser';
 import { Component, DebugElement } from '@angular/core';
 import { AuthService } from '../services/auth.service';
@@ -10,7 +10,7 @@ import { AuthService } from '../services/auth.service';
   template: `<app-user-panel [user]="user"></app-user-panel>`
 })
 class TestHostComponent {
-  public user: UserEntity = {
+  public user: User = {
     id: 1,
     firstName: 'name1',
     lastName: 'name2',

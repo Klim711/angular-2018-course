@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserEntity } from '../user-entity';
+import { User } from '../user.interface';
 
 const ONE_HOUR = Number('3.6e+6');
 
@@ -10,7 +10,7 @@ export class AuthService {
 
   constructor() { }
 
-  public logIn(user: UserEntity) {
+  public logIn(user: User) {
     localStorage.setItem(`users.${user.email}`, JSON.stringify(user));
   }
 
@@ -18,7 +18,7 @@ export class AuthService {
     localStorage.removeItem(`users.${email}`);
   }
 
-  public isAuthenticated(user: UserEntity): boolean {
+  public isAuthenticated(user: User): boolean {
     if (!user) {
       return false;
     }
@@ -32,7 +32,7 @@ export class AuthService {
     return (Number(new Date()) - token) > ONE_HOUR;
   }
 
-  public getUserInfo(): UserEntity {
+  public getUserInfo(): User {
     if (window.location.pathname === '/login') {
       return null;
     } else {

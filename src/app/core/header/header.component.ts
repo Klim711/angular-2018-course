@@ -1,4 +1,4 @@
-import { UserEntity } from './../user-entity';
+import { User } from '../user.interface';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 
@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  public user: UserEntity;
+  public user: User;
   constructor(private authService: AuthService) { }
 
   ngOnInit() {

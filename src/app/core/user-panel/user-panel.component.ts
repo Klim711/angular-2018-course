@@ -1,4 +1,4 @@
-import { UserEntity } from './../user-entity';
+import { User } from '../user.interface';
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 
@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./user-panel.component.css']
 })
 export class UserPanelComponent implements OnInit {
-  @Input() public user: UserEntity;
+  @Input() public user: User;
 
   constructor(private authService: AuthService) { }
 
