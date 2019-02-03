@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../user.interface';
+import { UserModel } from '../models/user-model.class';
 
 const ONE_HOUR = Number('3.6e+6');
 
@@ -36,13 +37,13 @@ export class AuthService {
     if (window.location.pathname === '/login') {
       return null;
     } else {
-      const user = {
+      const user = new UserModel({
         id: 711,
         firstName: 'Klim',
         lastName: 'Shuplenkov',
         email: 'klim@example.com',
         token: Number(new Date()),
-      };
+      });
       this.logIn(user);
       return user;
     }
