@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Course } from '../course.interface';
+import { CourseModel } from '../course-model.class';
 
 @Injectable({
   providedIn: 'root'
@@ -84,7 +85,7 @@ export class CoursesService {
   public createCourseItem(content: Object) {
     const id = this.coursesList.length;
 
-    const newCourse = Object.assign({id}, content);
+    const newCourse = new CourseModel({id, ...content});
 
     this.coursesList = [
       ...this.coursesList,
