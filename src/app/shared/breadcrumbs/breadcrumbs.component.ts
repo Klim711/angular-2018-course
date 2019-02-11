@@ -25,7 +25,7 @@ export class BreadcrumbsComponent implements OnInit {
       if (data.id) {
         let course = this.coursesService.getCourseItem(Number(data.id));
 
-        this.content = `${course.title}`;
+        this.content = `${course.name}`;
       } else {
         this.content = 'New Course'
       }

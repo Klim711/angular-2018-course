@@ -10,56 +10,7 @@ const COURSES_SOURCE = 'http://localhost:3004/courses';
   providedIn: 'root'
 })
 export class CoursesService {
-  private coursesList: Course[] = [
-    new CourseModel({
-      id: 1,
-      title: 'a',
-      create_date: new Date('12/20/2018'),
-      duration: 123,
-      description: 'AAA',
-      rating: 9,
-    }),
-    new CourseModel({
-      id: 2,
-      title: 'b',
-      create_date: new Date('1/1/2019'),
-      duration: 33,
-      description: 'BBB',
-      rating: 7,
-    }),
-    new CourseModel({
-      id: 3,
-      title: 'c',
-      create_date: new Date('1/1/2020'),
-      duration: 120,
-      description: 'CCC',
-      rating: 4,
-    }),
-    new CourseModel({
-      id: 4,
-      title: 'D',
-      create_date: new Date('1/1/2011'),
-      duration: 25,
-      description: 'DDD',
-      rating: null,
-    }),
-    new CourseModel({
-      id: 5,
-      title: 'E',
-      create_date: new Date('1/1/2011'),
-      duration: 123,
-      description: 'EEE',
-      rating: 60,
-    }),
-    new CourseModel({
-      id: 6,
-      title: 'F',
-      create_date: new Date('1/1/2011'),
-      duration: 59,
-      description: 'FFF',
-      rating: 6,
-    }),
-  ];
+  private coursesList: Course[] = [];
   public coursesListUpdated:EventEmitter<any> = new EventEmitter();
   constructor(private http: HttpClient) { }
 

@@ -1,11 +1,11 @@
 <div class="card course-item">
-  <div class="card-header {{courseItem.create_date | courseClass}}">
+  <div class="card-header {{courseItem.date | courseClass}}">
     <div class="course-title">
-      <h4>{{courseItem.title | uppercase}}</h4>
-      <span *ngIf="courseItem.rating"><i class="far fa-star"></i>x{{courseItem.rating}}</span>
+      <h4>{{courseItem.name | uppercase}}</h4>
+      <span *ngIf="courseItem.isTopRated"><i class="far fa-star"></i></span>
     </div>
-    <span class="course-duration">{{courseItem.duration | courseDuration}}</span>
-    <span class="course-date">{{courseItem.create_date  | date:"MM.dd.yyyy"}}</span>
+    <span class="course-duration">{{courseItem.length | courseDuration}}</span>
+    <span class="course-date">{{courseItem.date  | date:"MM.dd.yyyy"}}</span>
   </div>
   <div class="card-body">
     <p class="course-description">{{courseItem.description}}</p>

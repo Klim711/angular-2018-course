@@ -2,19 +2,19 @@ import { Course } from '../../../shared/interfaces/course.interface';
 
 export class CourseModel implements Course {
   public id: number;
-  public title: string = 'title';
-  public create_date: Date = new Date();
-  public duration: number = 0;
+  public name: string = 'title';
+  public date: Date = new Date();
+  public length: number = 0;
   public description: string = 'description';
-  public rating: number | null = null;
+  public isTopRated: boolean = false;
 
   constructor(content: {
     id: number,
-    title?: string,
-    create_date?: Date,
-    duration?: number,
+    name?: string,
+    date?: Date,
+    length?: number,
     description?: string,
-    rating?: number,
+    isTopRated?: boolean,
   }) {
     Object.assign(this, content);
   }

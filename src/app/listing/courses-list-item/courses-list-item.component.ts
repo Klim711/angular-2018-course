@@ -24,7 +24,7 @@ export class CoursesListItemComponent implements OnInit {
   }
 
   deleteCourse() {
-    if (confirm(`You are going to delete course ${this.courseItem.title}`)) {
+    if (confirm(`You are going to delete course ${this.courseItem.name}`)) {
       this.coursesService.deleteCourse(this.courseItem.id);
     }
   }

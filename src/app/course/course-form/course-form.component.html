@@ -1,7 +1,7 @@
 <form #courseForm="ngForm">
   <div class="form-group">
     <label for="courseTitle">Title</label>
-    <input [(ngModel)]="title" name="courseTitle"
+    <input [(ngModel)]="name" name="courseTitle"
       type="text" id="courseTitle" class="form-control">
   </div>
   <div class="form-group">
@@ -19,9 +19,9 @@
   <div class="form-group">
     <label for="courseDuration">Duration</label>
     <div class="duration-block">
-      <input [(ngModel)]="duration" name="courseDuration"
+      <input [(ngModel)]="length" name="courseDuration"
         type="number" id="courseDuration" class="form-control">
-      <span class="course-duration">{{duration | courseDuration}}</span>
+      <span class="course-duration">{{length | courseDuration}}</span>
     </div>
   </div>
   <div class="form-group">

@@ -11,10 +11,10 @@ import * as moment from 'moment';
 })
 export class CourseFormComponent implements OnInit {
   private originalCourse: Course = null;
-  public title: string = '';
+  public name: string = '';
   public description: string = '';
   public date: string = '';
-  public duration: string = '';
+  public length: string = '';
 
   constructor(
     private coursesService: CoursesService,
@@ -38,18 +38,18 @@ export class CourseFormComponent implements OnInit {
   }
 
   setFormFields(course: Course) {
-    this.title = course.title;
+    this.name = course.name;
     this.description = course.description;
-    this.date = moment(course.create_date).format('YYYY-MM-DD');
-    this.duration = String(course.duration);
+    this.date = moment(course.date).format('YYYY-MM-DD');
+    this.length = String(course.length);
   }
 
   save() {
     const content = {
-      title: this.title,
+      name: this.name,
       description: this.description,
-      create_date: new Date(this.date),
-      duration: this.duration,
+      date: new Date(this.date),
+      length: this.length,
     };
     if (this.originalCourse) {
       this.coursesService.editCourseItem(this.originalCourse.id, content);
@@ -65,9 +65,9 @@ export class CourseFormComponent implements OnInit {
   }
 
   resetForm() {
-    this.title = '';
+    this.name = '';
     this.description = '';
     this.date = '';
-    this.duration = '';
+    this.length = '';
   }
 }

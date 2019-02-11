@@ -15,11 +15,11 @@ import { DatePipe } from '@angular/common';
 class TestHostComponent {
   public course: Course = {
     id: 1,
-    title: 'some title',
-    create_date: new Date('1/1/2011'),
-    duration: 123,
+    name: 'some title',
+    date: new Date('1/1/2011'),
+    length: 123,
     description: 'AAA',
-    rating: 123,
+    isTopRated: false,
   };
 }
 describe('CoursesListItemComponent', () => {
@@ -58,7 +58,7 @@ describe('CoursesListItemComponent', () => {
       const element = fixture.debugElement
         .query(By.css('.course-title h4')).nativeElement;
 
-      expect(element.textContent).toBe(course.title.toUpperCase());
+      expect(element.textContent).toBe(course.name.toUpperCase());
     });
 
     it('course duration', () => {
@@ -66,7 +66,7 @@ describe('CoursesListItemComponent', () => {
         .query(By.css('.course-duration')).nativeElement;
 
       expect(element.textContent).toBe(
-        CourseDurationPipe.prototype.transform(course.duration));
+        CourseDurationPipe.prototype.transform(course.length));
     });
 
     it('course create_date', () => {
@@ -75,7 +75,7 @@ describe('CoursesListItemComponent', () => {
       const datePipe = new DatePipe('en');
 
       expect(element.textContent).toBe(
-        datePipe.transform(course.create_date, 'MM.dd.yyyy'));
+        datePipe.transform(course.date, 'MM.dd.yyyy'));
     });
 
     it('course description', () => {
@@ -94,7 +94,7 @@ describe('CoursesListItemComponent', () => {
     button.triggerEventHandler('click', null);
 
     expect(window.alert).toHaveBeenCalledWith(
-      `You are editing course ${course.title}`);
+      `You are editing course ${course.name}`);
   });
 
   describe('on delete button click', () => {

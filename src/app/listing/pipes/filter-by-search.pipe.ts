@@ -10,7 +10,7 @@ export class FilterBySearchPipe implements PipeTransform {
     if (!searchValue) {
       return Array.from(courses);
     }
-    return courses.filter((course) => course.title.includes(searchValue));
+    return courses.filter((course) => course.name.includes(searchValue));
   }
 
 }
