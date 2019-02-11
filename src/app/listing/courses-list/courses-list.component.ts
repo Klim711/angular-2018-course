@@ -1,5 +1,5 @@
 import { Course } from '../../shared/interfaces/course.interface';
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-courses-list',
@@ -9,10 +9,14 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 })
 export class CoursesListComponent implements OnInit {
   @Input() public courses: Course[];
+  @Output() public loadMore: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  loadMoreCourses() {
+    this.loadMore.emit();
+  }
 }

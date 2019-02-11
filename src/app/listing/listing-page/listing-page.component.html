@@ -1,3 +1,11 @@
 <app-courses-toolbar></app-courses-toolbar>
-<app-courses-list *ngIf="courses && courses.length" [courses]='courses | sortByDate | filterBySearch:searchValue'></app-courses-list>
+<app-courses-list
+    *ngIf="courses && courses.length"
+    [courses]='courses | sortByDate | filterBySearch:searchValue'
+    (loadMore)="loadMore($event)">
+</app-courses-list>
+<!-- <div *ngIf="courses && courses.length">
+  <app-courses-list-item *ngFor="let item of courses" [courseItem]="item"></app-courses-list-item>
+  <app-load-more></app-load-more>
+</div> -->
 <app-no-courses *ngIf="!courses || !courses.length"></app-no-courses>
