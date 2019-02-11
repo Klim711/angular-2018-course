@@ -10,13 +10,16 @@ import { CoursesService } from '../services/courses.service';
 export class ListingPageComponent implements OnInit {
   public courses: Course[] = [];
   public searchValue: string = '';
+  public pageSize: number = 10;
+  public pageNumber: number = 0;
 
   constructor(private coursesService: CoursesService) { }
 
   ngOnInit() {
-    this.coursesService.getCoursesList().subscribe((data) => {
-      this.courses = data;
-    });
+    this.coursesService.getCoursesList(this.pageNumber, this.pageSize)
+      .subscribe((data) => {
+        this.courses = data;
+      });
   }
 
 }

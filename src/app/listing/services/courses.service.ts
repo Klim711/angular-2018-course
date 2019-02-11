@@ -14,8 +14,14 @@ export class CoursesService {
   public coursesListUpdated:EventEmitter<any> = new EventEmitter();
   constructor(private http: HttpClient) { }
 
-  public getCoursesList(): Observable<Course[]> {
-    return this.http.get<Course[]>(`${COURSES_SOURCE}`);
+  public getCoursesList(
+    pageNumber:number,
+    pageSize:number = 10
+  ):Observable<Course[]> {
+    const start = pageNumber * pageSize;
+    const count = pageSize;
+    return this.http.get<Course[]>(
+      `${COURSES_SOURCE}?start=${start}&count=${count}`);
   }
 
   public getCourseItem(id: number): Course {
