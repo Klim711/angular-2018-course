@@ -2,6 +2,7 @@ import { ListingModule } from './listing/listing.module';
 import { CoreModule } from './core/core.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { RoutingModule } from './routing.module';
@@ -19,6 +20,7 @@ import { CourseModule } from './course/course.module';
     RoutingModule,
     LoginModule,
     CourseModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

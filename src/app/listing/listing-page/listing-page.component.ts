@@ -14,10 +14,9 @@ export class ListingPageComponent implements OnInit {
   constructor(private coursesService: CoursesService) { }
 
   ngOnInit() {
-    this.coursesService.coursesListUpdated.subscribe(() => {
-      this.courses = this.coursesService.getCoursesList();
-    })
-    this.courses = this.coursesService.getCoursesList();
+    this.coursesService.getCoursesList().subscribe((data) => {
+      this.courses = data;
+    });
   }
 
 }

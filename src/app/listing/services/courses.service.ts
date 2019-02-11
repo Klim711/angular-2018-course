@@ -1,6 +1,10 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Course } from '../../shared/interfaces/course.interface';
 import { CourseModel } from '../models/course/course-model.class';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+const COURSES_SOURCE = 'http://localhost:3004/courses';
 
 @Injectable({
   providedIn: 'root'
@@ -57,10 +61,10 @@ export class CoursesService {
     }),
   ];
   public coursesListUpdated:EventEmitter<any> = new EventEmitter();
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  public getCoursesList(): Course[] {
-    return this.coursesList;
+  public getCoursesList(): Observable<Course[]> {
+    return this.http.get<Course[]>(`${COURSES_SOURCE}`);
   }
 
   public getCourseItem(id: number): Course {
