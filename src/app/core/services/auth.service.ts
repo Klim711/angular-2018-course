@@ -1,8 +1,11 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { User } from '../user.interface';
 import { UserModel } from '../models/user-model.class';
+import { HttpClient } from '@angular/common/http';
 
 const ONE_HOUR = Number('3.6e+6');
+
+const LOGIN_SOURCE = `http://localhost:3004/auth/login`;
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +13,15 @@ const ONE_HOUR = Number('3.6e+6');
 export class AuthService {
   public authUpdated:EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(private http:HttpClient) {}
 
   public logIn(userContent: {email: string, password: string}) {
-    const token = Number(new Date());
-    const user = new UserModel({
-      ...userContent,
-      token,
-    });
-    localStorage.setItem('currentUser', JSON.stringify(user));
-    this.authUpdated.emit();
+    const data = {
+      login: userContent.email,
+      password: userContent.password,
+    };
+
+    return this.http.post(`${LOGIN_SOURCE}`, {data});
   }
 
   public logOut() {

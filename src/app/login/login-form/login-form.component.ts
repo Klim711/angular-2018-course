@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
+import { observable } from 'rxjs';
 
 @Component({
   selector: 'app-login-form',
@@ -31,7 +32,9 @@ export class LoginFormComponent implements OnInit {
     this.authService.logIn({
       email: this.email,
       password: this.password,
+    }).subscribe((data) => {
+      console.log(data);
+      this.router.navigate(['/listing']);
     });
-    this.router.navigate(['/listing']);
   }
 }
