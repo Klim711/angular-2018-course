@@ -32,8 +32,7 @@ export class LoginFormComponent implements OnInit {
     this.authService.logIn({
       email: this.email,
       password: this.password,
-    }).subscribe((data) => {
-      console.log(data);
+    }).subscribe(() => {
       this.router.navigate(['/listing']);
     });
   }
