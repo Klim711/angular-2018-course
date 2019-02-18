@@ -1,0 +1,21 @@
+.date-block input,
+.duration-block input {
+  display: inline-block;
+  width: 20%;
+}
+
+.course-duration {
+  margin-left: 20px;
+}
+
+.form-buttons {
+  margin-top: 30px;
+}
+
+.save-button, .cancel-button {
+  min-width: 10%
+}
+
+.cancel-button {
+  margin-left: 20px;
+}

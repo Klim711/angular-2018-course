@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RoutingModule } from './routing.module';
 import { LoginModule } from './login/login.module';
+import { CourseModule } from './course/course.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LoginModule } from './login/login.module';
     ListingModule,
     RoutingModule,
     LoginModule,
+    CourseModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
