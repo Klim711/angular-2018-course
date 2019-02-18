@@ -1,7 +1,15 @@
 export interface User {
-  email: string;
+  id: number;
+  fakeToken: string;
+  name: {
+    first: string,
+    last: string,
+  };
+  login: string;
   password: string;
-  firstName: string;
-  lastName: string;
-  token: number | null;
+  // email: string;
+  // password: string;
+  // firstName: string;
+  // lastName: string;
+  // token: number | null;
 }
