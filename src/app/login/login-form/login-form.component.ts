@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { Router } from '@angular/router';
-import { observable } from 'rxjs';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-login-form',
@@ -9,13 +6,11 @@ import { observable } from 'rxjs';
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
+  @Output() public logIn: EventEmitter<Object> = new EventEmitter();
   public email: string = '';
   public password: string = '';
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor() {}
 
   ngOnInit() {
   }
@@ -28,12 +23,10 @@ export class LoginFormComponent implements OnInit {
     this.password = (<HTMLInputElement>event.target).value;
   }
 
-  logIn() {
-    this.authService.logIn({
+  makeLogIn() {
+    this.logIn.emit({
       email: this.email,
       password: this.password,
-    }).subscribe(() => {
-      this.router.navigate(['/listing']);
-    });
+    })
   }
 }
