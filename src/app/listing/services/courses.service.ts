@@ -56,15 +56,8 @@ export class CoursesService {
     ];
   }
 
-  public createCourseItem(content: Object) {
-    const id = this.coursesList.length;
-
-    const newCourse = new CourseModel({id, ...content});
-
-    this.coursesList = [
-      ...this.coursesList,
-      newCourse,
-    ];
+  public createCourseItem(content: Object): Observable<any> {
+    return this.http.post(`${COURSES_SOURCE}`, content);
   }
 
   public deleteCourse(id: number): Observable<any> {

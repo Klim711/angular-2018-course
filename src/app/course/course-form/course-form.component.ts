@@ -54,10 +54,10 @@ export class CourseFormComponent implements OnInit {
     if (this.originalCourse) {
       this.coursesService.editCourseItem(this.originalCourse.id, content);
     } else {
-      this.coursesService.createCourseItem(content);
+      this.coursesService.createCourseItem(content).subscribe(() => {
+        this.router.navigate(['/listing']);
+      });
     }
-
-    this.router.navigate(['/listing']);
   }
 
   cancel() {
