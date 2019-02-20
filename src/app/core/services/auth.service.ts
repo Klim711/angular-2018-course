@@ -23,7 +23,7 @@ export class AuthService {
       password: userContent.password,
     };
 
-    return this.http.post(`${LOGIN_SOURCE}/login`, {data})
+    return this.http.post(`${LOGIN_SOURCE}/login`, data)
       .pipe(
         tap(({token}) => {
           localStorage.setItem('token', JSON.stringify({
