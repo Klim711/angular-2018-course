@@ -34,6 +34,12 @@ export class ListingPageComponent implements OnInit {
       });
   }
 
+  deleteCourse(courseId: number) {
+    this.coursesService.deleteCourse(courseId).subscribe(() => {
+      this.getCoursesList();
+    });
+  }
+
   loadMore() {
     this.pageNumber++;
     this.getCoursesList();

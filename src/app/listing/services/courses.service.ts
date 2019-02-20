@@ -67,9 +67,7 @@ export class CoursesService {
     ];
   }
 
-  public deleteCourse(id: number) {
-    this.coursesList = this.coursesList.filter((item) => item.id !== id);
-
-    this.coursesListUpdated.emit();
+  public deleteCourse(id: number): Observable<any> {
+    return this.http.delete(`${COURSES_SOURCE}/${id}`);
   }
 }

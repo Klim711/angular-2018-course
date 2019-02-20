@@ -1,5 +1,5 @@
 import { Course } from '../../shared/interfaces/course.interface';
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { CoursesService } from '../services/courses.service';
 import { Router } from '@angular/router';
 
@@ -10,9 +10,10 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoursesListItemComponent implements OnInit {
+  @Output() public delete: EventEmitter<number> = new EventEmitter();
   @Input() public courseItem:Course;
+
   constructor(
-    private coursesService: CoursesService,
     private router: Router
   ) {}
 
@@ -25,7 +26,7 @@ export class CoursesListItemComponent implements OnInit {
 
   deleteCourse() {
     if (confirm(`You are going to delete course ${this.courseItem.name}`)) {
-      this.coursesService.deleteCourse(this.courseItem.id);
+      this.delete.emit(this.courseItem.id);
     }
   }
 }
