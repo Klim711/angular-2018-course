@@ -9,7 +9,6 @@ import { AddCourseComponent } from './add-course/add-course.component';
 import { CourseClassPipe } from './pipes/course-class.pipe';
 import { NoCoursesComponent } from './no-courses/no-courses.component';
 import { SortByDatePipe } from './pipes/sort-by-date.pipe';
-import { FilterBySearchPipe } from './pipes/filter-by-search.pipe';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -22,8 +21,7 @@ import { SharedModule } from '../shared/shared.module';
     AddCourseComponent,
     CourseClassPipe,
     NoCoursesComponent,
-    SortByDatePipe,
-    FilterBySearchPipe
+    SortByDatePipe
   ],
   imports: [
     CommonModule,

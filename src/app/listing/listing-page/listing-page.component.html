@@ -1,7 +1,7 @@
 <app-courses-toolbar></app-courses-toolbar>
 <app-courses-list
     *ngIf="courses && courses.length"
-    [courses]='courses | sortByDate | filterBySearch:searchValue'
+    [courses]='courses | sortByDate'
     (loadMore)="loadMore($event)">
 </app-courses-list>
 <!-- <div *ngIf="courses && courses.length">
