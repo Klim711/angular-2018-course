@@ -17,9 +17,12 @@ export class LoginPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/listing']);
+    }
     this.route.queryParams.subscribe((params) => {
       this.return = params.return || '/listing';
-    })
+    });
   }
 
   logIn(credentials: {email: string, password:string}) {
