@@ -1,11 +1,8 @@
 <app-courses-toolbar></app-courses-toolbar>
-<app-courses-list
-    *ngIf="courses && courses.length"
-    [courses]='courses | sortByDate'
-    (loadMore)="loadMore($event)">
-</app-courses-list>
-<!-- <div *ngIf="courses && courses.length">
+<div *ngIf="courses && courses.length">
   <app-courses-list-item *ngFor="let item of courses" [courseItem]="item"></app-courses-list-item>
-  <app-load-more></app-load-more>
-</div> -->
+  <button (click)="loadMore()" type="button" class="btn btn-outline-dark btn-lg load-more">
+    Load More
+  </button>
+</div>
 <app-no-courses *ngIf="!courses || !courses.length"></app-no-courses>
