@@ -25,10 +25,12 @@ export class CourseFormComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((data) => {
       if (data.id) {
-        const courseItem = this.coursesService.getCourseItem(Number(data.id));
-        this.originalCourse = courseItem;
+        this.coursesService.getCourseItem(Number(data.id))
+          .subscribe((course: Course) => {
+            this.originalCourse = course;
 
-        this.setFormFields(courseItem);
+            this.setFormFields(course);
+          });
       } else {
         this.originalCourse = null;
 
@@ -52,11 +54,15 @@ export class CourseFormComponent implements OnInit {
       length: this.length,
     };
     if (this.originalCourse) {
-      this.coursesService.editCourseItem(this.originalCourse.id, content);
+      this.coursesService.editCourseItem(this.originalCourse.id, content)
+        .subscribe(() => {
+          this.router.navigate(['/listing']);
+        });
     } else {
-      this.coursesService.createCourseItem(content).subscribe(() => {
-        this.router.navigate(['/listing']);
-      });
+      this.coursesService.createCourseItem(content)
+        .subscribe(() => {
+          this.router.navigate(['/listing']);
+        });
     }
   }
 

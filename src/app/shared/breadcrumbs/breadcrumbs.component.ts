@@ -23,9 +23,10 @@ export class BreadcrumbsComponent implements OnInit {
 
     this.route.params.subscribe((data) => {
       if (data.id) {
-        let course = this.coursesService.getCourseItem(Number(data.id));
-
-        this.content = `${course.name}`;
+        this.coursesService.getCourseItem(Number(data.id))
+          .subscribe((course) => {
+            this.content = `${course.name}`;
+          });
       } else {
         this.content = 'New Course'
       }

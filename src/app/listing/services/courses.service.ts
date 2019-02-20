@@ -38,23 +38,12 @@ export class CoursesService {
     this.searchValueUpdated.emit(value);
   }
 
-  public getCourseItem(id: number): Course {
-    return this.coursesList.find((course) => course.id === id);
+  public getCourseItem(id: number): Observable<Course> {
+    return this.http.get<Course>(`${COURSES_SOURCE}/${id}`);
   }
 
-  public editCourseItem(id: number, content: Object) {
-    const courses = this.coursesList;
-    const indexOfEditedCourse = courses
-      .findIndex((course) => course.id === id);
-
-    const modifiedCourse = Object.assign({},
-        courses[indexOfEditedCourse], content);
-
-    this.coursesList = [
-      ...courses.slice(0, indexOfEditedCourse),
-      modifiedCourse,
-      ...courses.slice(indexOfEditedCourse + 1, courses.length),
-    ];
+  public editCourseItem(id: number, content: Object): Observable<any> {
+    return this.http.put(`${COURSES_SOURCE}/${id}`, content);
   }
 
   public createCourseItem(content: Object): Observable<any> {
