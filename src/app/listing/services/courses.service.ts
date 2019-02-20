@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Course } from '../../shared/interfaces/course.interface';
 import { CourseModel } from '../models/course/course-model.class';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const COURSES_SOURCE = 'http://localhost:3004/courses';
@@ -12,16 +12,29 @@ const COURSES_SOURCE = 'http://localhost:3004/courses';
 export class CoursesService {
   private coursesList: Course[] = [];
   public coursesListUpdated:EventEmitter<any> = new EventEmitter();
-  constructor(private http: HttpClient) { }
+  public searchValueUpdated:EventEmitter<any> = new EventEmitter();
+
+  constructor(private http: HttpClient) {
+    this.initPageNumber();
+  }
+
+  private initPageNumber() {
+  }
 
   public getCoursesList(
     pageNumber:number,
-    pageSize:number = 10
+    pageSize:number = 10,
+    textFragment: string = '',
   ):Observable<Course[]> {
-    const start = pageNumber * pageSize;
-    const count = pageSize;
-    return this.http.get<Course[]>(
-      `${COURSES_SOURCE}?start=${start}&count=${count}`);
+    const start = 0;
+    const count = pageNumber * pageSize;
+    const params =
+      `?start=${start}&count=${count}&textFragment=${textFragment}`;
+    return this.http.get<Course[]>(`${COURSES_SOURCE}${params}`);
+  }
+
+  public setSearchValue(value) {
+    this.searchValueUpdated.emit(value);
   }
 
   public getCourseItem(id: number): Course {
