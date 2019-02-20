@@ -29,8 +29,9 @@ export class CoursesService {
     const start = 0;
     const count = pageNumber * pageSize;
     const params =
-      `?start=${start}&count=${count}&textFragment=${textFragment}`;
-    return this.http.get<Course[]>(`${COURSES_SOURCE}${params}`);
+      `start=${start}&count=${count}&textFragment=${textFragment}`;
+    const sort = `_sort=date&_order=desc`
+    return this.http.get<Course[]>(`${COURSES_SOURCE}?${params}&${sort}`);
   }
 
   public setSearchValue(value) {
