@@ -3,13 +3,13 @@ import { By } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
 
 import { CoursesListComponent } from './courses-list.component';
-import { CoursesListItem } from '../courses-list-item.model';
+import { Course } from '../../shared/interfaces/course.interface';
 
 @Component({
   template: `<app-courses-list [courses]="courses"></app-courses-list>`
 })
 class TestHostComponent {
-  public courses: CoursesListItem[] = [
+  public courses: Course[] = [
     {
       id: 1,
       title: 'A',

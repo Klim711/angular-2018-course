@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserPanelComponent } from './user-panel.component';
-import { UserEntity } from './../user-entity';
+import { User } from '../user.interface';
 import { By } from '@angular/platform-browser';
 import { Component, DebugElement } from '@angular/core';
 import { AuthService } from '../services/auth.service';
@@ -10,9 +10,9 @@ import { AuthService } from '../services/auth.service';
   template: `<app-user-panel [user]="user"></app-user-panel>`
 })
 class TestHostComponent {
-  public user: UserEntity = {
-    id: 1,
+  public user: User = {
     firstName: 'name1',
+    password: 'password',
     lastName: 'name2',
     email: 'email',
     token: 123,
@@ -70,9 +70,8 @@ describe('UserPanelComponent', () => {
 
     it('should log out current user', () => {
       button.triggerEventHandler('click', null);
-      const user = testHost.user;
 
-      expect(authService.logOut).toHaveBeenCalledWith(user.email);
+      expect(authService.logOut).toHaveBeenCalled();
     });
   });
 });

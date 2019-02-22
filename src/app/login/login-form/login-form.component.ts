@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -9,8 +11,10 @@ export class LoginFormComponent implements OnInit {
   public email: string = '';
   public password: string = '';
 
-  constructor() {
-  }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
   }
@@ -24,6 +28,10 @@ export class LoginFormComponent implements OnInit {
   }
 
   logIn() {
-    alert(`You are kind of login by email: ${this.email}`);
+    this.authService.logIn({
+      email: this.email,
+      password: this.password,
+    });
+    this.router.navigate(['/listing']);
   }
 }

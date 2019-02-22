@@ -1,4 +1,4 @@
-import { CoursesListItem } from './../courses-list-item.model';
+import { Course } from '../../shared/interfaces/course.interface';
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../services/courses.service';
 
@@ -8,7 +8,7 @@ import { CoursesService } from '../services/courses.service';
   styleUrls: ['./listing-page.component.css']
 })
 export class ListingPageComponent implements OnInit {
-  public courses: CoursesListItem[] = [];
+  public courses: Course[] = [];
   public searchValue: string = '';
 
   constructor(private coursesService: CoursesService) { }

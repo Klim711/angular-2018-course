@@ -1,5 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
 
 html, body {
   height: 100%;
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: inherit;
 }

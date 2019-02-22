@@ -1,4 +1,4 @@
-import { CoursesListItem } from './../courses-list-item.model';
+import { Course } from '../../shared/interfaces/course.interface';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesListItemComponent } from './courses-list-item.component';
@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common';
   template: `<app-courses-list-item [courseItem]="course"></app-courses-list-item>`
 })
 class TestHostComponent {
-  public course: CoursesListItem = {
+  public course: Course = {
     id: 1,
     title: 'some title',
     create_date: new Date('1/1/2011'),
@@ -25,7 +25,7 @@ class TestHostComponent {
 describe('CoursesListItemComponent', () => {
   let testHost: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
-  let course: CoursesListItem;
+  let course:Course;
   let coursesService: CoursesService;
 
   beforeEach(async(() => {
