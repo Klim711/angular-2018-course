@@ -2,7 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { User } from '../user.interface';
 import { UserModel } from '../models/user-model.class';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, empty } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 const ONE_HOUR = Number('3.6e+6');
@@ -13,7 +13,7 @@ const LOGIN_SOURCE = `http://localhost:3004/auth`;
   providedIn: 'root'
 })
 export class AuthService {
-  public authUpdated:EventEmitter<any> = new EventEmitter();
+  public authUpdated:EventEmitter<void> = new EventEmitter();
 
   constructor(private http:HttpClient) {}
 
@@ -30,6 +30,8 @@ export class AuthService {
             date: new Date(),
             token: token,
           }));
+
+          this.authUpdated.emit();
         }),
       );
   }
@@ -40,6 +42,8 @@ export class AuthService {
 
   public logOut() {
     localStorage.removeItem('token');
+
+    this.authUpdated.emit();
   }
 
   public isAuthenticated(): boolean {
@@ -53,12 +57,16 @@ export class AuthService {
   }
 
   public getUserInfo(): Observable<User> {
-    const {token} = this.getToken();
+    const tokenObject = this.getToken();
+
+    if (!tokenObject) {
+      return empty();
+    }
 
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'Authorization': token,
+        'Authorization': tokenObject.token,
       })
     };
     return this.http.post<User>(`${LOGIN_SOURCE}/userinfo`, null, httpOptions);
