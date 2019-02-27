@@ -9,6 +9,7 @@ import { RoutingModule } from './routing.module';
 import { LoginModule } from './login/login.module';
 import { CourseModule } from './course/course.module';
 import { TokenInterceptor } from './core/services/token.interceptor';
+import { LoadingInterceptor } from './core/services/loading-block/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,11 @@ import { TokenInterceptor } from './core/services/token.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
       multi: true,
     },
   ],
