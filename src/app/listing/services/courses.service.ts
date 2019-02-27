@@ -1,7 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Course } from '../../shared/interfaces/course.interface';
-import { CourseModel } from '../models/course/course-model.class';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const COURSES_SOURCE = 'http://localhost:3004/courses';
@@ -10,7 +9,6 @@ const COURSES_SOURCE = 'http://localhost:3004/courses';
   providedIn: 'root'
 })
 export class CoursesService {
-  private coursesList: Course[] = [];
   public coursesListUpdated:EventEmitter<any> = new EventEmitter();
   public searchValueUpdated:EventEmitter<any> = new EventEmitter();
 
