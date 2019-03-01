@@ -1,47 +1,74 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { User } from '../user.interface';
 import { UserModel } from '../models/user-model.class';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, empty } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 const ONE_HOUR = Number('3.6e+6');
+
+const LOGIN_SOURCE = `http://localhost:3004/auth`;
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  public authUpdated:EventEmitter<any> = new EventEmitter();
+  public authUpdated:EventEmitter<void> = new EventEmitter();
 
-  constructor() { }
+  constructor(private http:HttpClient) {}
 
-  public logIn(userContent: {email: string, password: string}) {
-    const token = Number(new Date());
-    const user = new UserModel({
-      ...userContent,
-      token,
-    });
-    localStorage.setItem('currentUser', JSON.stringify(user));
-    this.authUpdated.emit();
+  public logIn(userContent: {email: string, password: string}):Observable<any> {
+    const data = {
+      login: userContent.email,
+      password: userContent.password,
+    };
+
+    return this.http.post(`${LOGIN_SOURCE}/login`, data)
+      .pipe(
+        tap(({token}) => {
+          localStorage.setItem('token', JSON.stringify({
+            date: new Date(),
+            token: token,
+          }));
+
+          this.authUpdated.emit();
+        }),
+      );
+  }
+
+  public getToken():{date: string, token: string} {
+    return JSON.parse(localStorage.getItem('token'));
   }
 
   public logOut() {
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem('token');
+
     this.authUpdated.emit();
   }
 
   public isAuthenticated(): boolean {
-    const user = this.getUserInfo();
-    if (!user) {
-      return false;
+    const tokenObject = this.getToken();
+
+    return tokenObject && !this._isTokenExpired(tokenObject.date);
+  }
+
+  private _isTokenExpired(tokenDate: string):boolean {
+    return (Number(new Date()) - Number(new Date(tokenDate))) > ONE_HOUR;
+  }
+
+  public getUserInfo(): Observable<User> {
+    const tokenObject = this.getToken();
+
+    if (!tokenObject) {
+      return empty();
     }
-    const userProfile = this.getUserInfo();
 
-    return userProfile && !this._isTokenExpired(userProfile.token);
-  }
-
-  private _isTokenExpired(token: number):boolean {
-    return (Number(new Date()) - token) > ONE_HOUR;
-  }
-
-  public getUserInfo(): User {
-    return JSON.parse(localStorage.getItem('currentUser'));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': tokenObject.token,
+      })
+    };
+    return this.http.post<User>(`${LOGIN_SOURCE}/userinfo`, null, httpOptions);
   }
 }

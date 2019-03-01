@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { ListingPageComponent } from './listing-page.component';
-import { FilterBySearchPipe } from '../pipes/filter-by-search.pipe';
 import { SortByDatePipe } from '../pipes/sort-by-date.pipe';
 
 describe('ListingPageComponent', () => {
@@ -13,7 +12,6 @@ describe('ListingPageComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         ListingPageComponent,
-        FilterBySearchPipe,
         SortByDatePipe,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -1,18 +1,24 @@
 import { User } from '../user.interface';
 
 export class UserModel implements User {
-  public email: string = 'admin@example.com';
-  public password: string;
-  public firstName: string = 'Admin';
-  public lastName: string = 'Admin';
-  public token: number | null = null;
+  public id: number = 711;
+  public fakeToken: string | null = String(new Date());
+  public name: {first: string, last: string} = {
+    first: 'admin',
+    last: 'admin',
+  };
+  public login: string = 'admin';
+  public password: string = 'admin';
 
   constructor(content: {
-    email: string,
+    id: number,
+    fakeToken: string,
+    name: {
+      first: string,
+      last: string,
+    },
+    login: string,
     password: string,
-    firstName?: string,
-    lastName?: string,
-    token?: number,
   }) {
     Object.assign(this, content);
   }

@@ -5,19 +5,43 @@ import { CoursesService } from '../services/courses.service';
 @Component({
   selector: 'app-listing-page',
   templateUrl: './listing-page.component.html',
-  styleUrls: ['./listing-page.component.css']
+  styleUrls: ['./listing-page.component.css'],
 })
 export class ListingPageComponent implements OnInit {
   public courses: Course[] = [];
-  public searchValue: string = '';
+  public pageSize: number = 10;
+  public pageNumber: number = 1;
+  private searchValue: string = '';
 
   constructor(private coursesService: CoursesService) { }
 
   ngOnInit() {
-    this.coursesService.coursesListUpdated.subscribe(() => {
-      this.courses = this.coursesService.getCoursesList();
-    })
-    this.courses = this.coursesService.getCoursesList();
+    this.getCoursesList();
+    this.coursesService.searchValueUpdated.subscribe((value) => {
+      this.searchValue = value || '';
+      this.pageNumber = 1;
+      this.getCoursesList();
+    });
   }
 
+  getCoursesList() {
+    this.coursesService
+      .getCoursesList(this.pageNumber, this.pageSize, this.searchValue)
+      .subscribe((data) => {
+        this.courses = [
+          ...data,
+        ];
+      });
+  }
+
+  deleteCourse(courseId: number) {
+    this.coursesService.deleteCourse(courseId).subscribe(() => {
+      this.getCoursesList();
+    });
+  }
+
+  loadMore() {
+    this.pageNumber++;
+    this.getCoursesList();
+  }
 }

@@ -1,101 +1,56 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Course } from '../../shared/interfaces/course.interface';
 import { CourseModel } from '../models/course/course-model.class';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+const COURSES_SOURCE = 'http://localhost:3004/courses';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
-  private coursesList: Course[] = [
-    new CourseModel({
-      id: 1,
-      title: 'a',
-      create_date: new Date('12/20/2018'),
-      duration: 123,
-      description: 'AAA',
-      rating: 9,
-    }),
-    new CourseModel({
-      id: 2,
-      title: 'b',
-      create_date: new Date('1/1/2019'),
-      duration: 33,
-      description: 'BBB',
-      rating: 7,
-    }),
-    new CourseModel({
-      id: 3,
-      title: 'c',
-      create_date: new Date('1/1/2020'),
-      duration: 120,
-      description: 'CCC',
-      rating: 4,
-    }),
-    new CourseModel({
-      id: 4,
-      title: 'D',
-      create_date: new Date('1/1/2011'),
-      duration: 25,
-      description: 'DDD',
-      rating: null,
-    }),
-    new CourseModel({
-      id: 5,
-      title: 'E',
-      create_date: new Date('1/1/2011'),
-      duration: 123,
-      description: 'EEE',
-      rating: 60,
-    }),
-    new CourseModel({
-      id: 6,
-      title: 'F',
-      create_date: new Date('1/1/2011'),
-      duration: 59,
-      description: 'FFF',
-      rating: 6,
-    }),
-  ];
+  private coursesList: Course[] = [];
   public coursesListUpdated:EventEmitter<any> = new EventEmitter();
-  constructor() { }
+  public searchValueUpdated:EventEmitter<any> = new EventEmitter();
 
-  public getCoursesList(): Course[] {
-    return this.coursesList;
+  constructor(private http: HttpClient) {
+    this.initPageNumber();
   }
 
-  public getCourseItem(id: number): Course {
-    return this.coursesList.find((course) => course.id === id);
+  private initPageNumber() {
   }
 
-  public editCourseItem(id: number, content: Object) {
-    const courses = this.coursesList;
-    const indexOfEditedCourse = courses
-      .findIndex((course) => course.id === id);
-
-    const modifiedCourse = Object.assign({},
-        courses[indexOfEditedCourse], content);
-
-    this.coursesList = [
-      ...courses.slice(0, indexOfEditedCourse),
-      modifiedCourse,
-      ...courses.slice(indexOfEditedCourse + 1, courses.length),
-    ];
+  public getCoursesList(
+    pageNumber:number,
+    pageSize:number = 10,
+    textFragment: string = '',
+  ):Observable<Course[]> {
+    const start = 0;
+    const count = pageNumber * pageSize;
+    const params =
+      `start=${start}&count=${count}&textFragment=${textFragment}`;
+    const sort = `_sort=date&_order=desc`
+    return this.http.get<Course[]>(`${COURSES_SOURCE}?${params}&${sort}`);
   }
 
-  public createCourseItem(content: Object) {
-    const id = this.coursesList.length;
-
-    const newCourse = new CourseModel({id, ...content});
-
-    this.coursesList = [
-      ...this.coursesList,
-      newCourse,
-    ];
+  public setSearchValue(value) {
+    this.searchValueUpdated.emit(value);
   }
 
-  public deleteCourse(id: number) {
-    this.coursesList = this.coursesList.filter((item) => item.id !== id);
+  public getCourseItem(id: number): Observable<Course> {
+    return this.http.get<Course>(`${COURSES_SOURCE}/${id}`);
+  }
 
-    this.coursesListUpdated.emit();
+  public editCourseItem(id: number, content: Object): Observable<any> {
+    return this.http.put(`${COURSES_SOURCE}/${id}`, content);
+  }
+
+  public createCourseItem(content: Object): Observable<any> {
+    return this.http.post(`${COURSES_SOURCE}`, content);
+  }
+
+  public deleteCourse(id: number): Observable<any> {
+    return this.http.delete(`${COURSES_SOURCE}/${id}`);
   }
 }

@@ -11,10 +11,10 @@ import * as moment from 'moment';
 })
 export class CourseFormComponent implements OnInit {
   private originalCourse: Course = null;
-  public title: string = '';
+  public name: string = '';
   public description: string = '';
   public date: string = '';
-  public duration: string = '';
+  public length: string = '';
 
   constructor(
     private coursesService: CoursesService,
@@ -25,10 +25,12 @@ export class CourseFormComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((data) => {
       if (data.id) {
-        const courseItem = this.coursesService.getCourseItem(Number(data.id));
-        this.originalCourse = courseItem;
+        this.coursesService.getCourseItem(Number(data.id))
+          .subscribe((course: Course) => {
+            this.originalCourse = course;
 
-        this.setFormFields(courseItem);
+            this.setFormFields(course);
+          });
       } else {
         this.originalCourse = null;
 
@@ -38,26 +40,30 @@ export class CourseFormComponent implements OnInit {
   }
 
   setFormFields(course: Course) {
-    this.title = course.title;
+    this.name = course.name;
     this.description = course.description;
-    this.date = moment(course.create_date).format('YYYY-MM-DD');
-    this.duration = String(course.duration);
+    this.date = moment(course.date).format('YYYY-MM-DD');
+    this.length = String(course.length);
   }
 
   save() {
     const content = {
-      title: this.title,
+      name: this.name,
       description: this.description,
-      create_date: new Date(this.date),
-      duration: this.duration,
+      date: new Date(this.date),
+      length: this.length,
     };
     if (this.originalCourse) {
-      this.coursesService.editCourseItem(this.originalCourse.id, content);
+      this.coursesService.editCourseItem(this.originalCourse.id, content)
+        .subscribe(() => {
+          this.router.navigate(['/listing']);
+        });
     } else {
-      this.coursesService.createCourseItem(content);
+      this.coursesService.createCourseItem(content)
+        .subscribe(() => {
+          this.router.navigate(['/listing']);
+        });
     }
-
-    this.router.navigate(['/listing']);
   }
 
   cancel() {
@@ -65,9 +71,9 @@ export class CourseFormComponent implements OnInit {
   }
 
   resetForm() {
-    this.title = '';
+    this.name = '';
     this.description = '';
     this.date = '';
-    this.duration = '';
+    this.length = '';
   }
 }

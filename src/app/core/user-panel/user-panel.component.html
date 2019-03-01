@@ -1,2 +1,2 @@
-<span>{{user.firstName}} {{user.lastName}}</span>
+<span *ngIf="user">{{user.name.first}} {{user.name.last}}</span>
 <button (click)="logOff()" type="button" class="btn btn-dark btn-sm">Log Off</button>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CoursesService } from '../services/courses.service';
 
 @Component({
   selector: 'app-search',
@@ -6,20 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  public value: string;
+  public value: string = '';
 
-  constructor() {
-    this.value = '';
-  }
+  constructor(private coursesService:CoursesService) {}
 
   ngOnInit() {
   }
 
   onKey(event: KeyboardEvent) {
-    this.value = (<HTMLInputElement>event.target).value;
+    const searchValue = (<HTMLInputElement>event.target).value;
+    this.value = searchValue;
   }
 
   search() {
-    alert(`You kind of searched courses by value: ${this.value}`);
+    this.coursesService.setSearchValue(this.value);
   }
 }
