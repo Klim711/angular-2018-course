@@ -3,6 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from 'src/app/listing/services/courses.service';
 import { Course } from 'src/app/shared/interfaces/course.interface';
 import * as moment from 'moment';
+import { Store } from '@ngrx/store';
+import { State } from '../store/course-page.reducers';
+import { AddCourse } from '../store/course-page.actions';
 
 @Component({
   selector: 'app-course-form',
@@ -19,7 +22,8 @@ export class CourseFormComponent implements OnInit {
   constructor(
     private coursesService: CoursesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store<State>
   ) {}
 
   ngOnInit() {
@@ -59,10 +63,7 @@ export class CourseFormComponent implements OnInit {
           this.router.navigate(['/listing']);
         });
     } else {
-      this.coursesService.createCourseItem(content)
-        .subscribe(() => {
-          this.router.navigate(['/listing']);
-        });
+      this.store.dispatch(new AddCourse(content));
     }
   }
 
