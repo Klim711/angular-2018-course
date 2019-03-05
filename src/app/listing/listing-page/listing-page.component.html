@@ -1,7 +1,7 @@
 <app-courses-toolbar></app-courses-toolbar>
-<div *ngIf="courses && courses.length">
+<div *ngIf="(courses$ | async)?.length">
   <app-courses-list-item
-      *ngFor="let item of courses"
+      *ngFor="let item of courses$ | async"
       [courseItem]="item"
       (delete)="deleteCourse($event)"
       >
@@ -10,4 +10,4 @@
     Load More
   </button>
 </div>
-<app-no-courses *ngIf="!courses || !courses.length"></app-no-courses>
+<app-no-courses *ngIf="!(courses$ | async)?.length"></app-no-courses>
