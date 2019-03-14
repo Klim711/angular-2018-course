@@ -7,6 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LogoComponent } from './logo/logo.component';
 import { UserPanelComponent } from './user-panel/user-panel.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LoadingBlockComponent } from './loading-block/loading-block.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     FooterComponent,
     LogoComponent,
     UserPanelComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoadingBlockComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    LoadingBlockComponent,
   ],
 })
 export class CoreModule { }

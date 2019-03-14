@@ -9,6 +9,7 @@ import { CourseClassPipe } from './pipes/course-class.pipe';
 import { NoCoursesComponent } from './no-courses/no-courses.component';
 import { SortByDatePipe } from './pipes/sort-by-date.pipe';
 import { SharedModule } from '../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     SharedModule,
+    ReactiveFormsModule,
   ],
   exports: [
     ListingPageComponent,
