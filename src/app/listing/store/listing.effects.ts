@@ -42,6 +42,12 @@ export class ListingEffects {
       )
     })
   );
+
+  @Effect()
+  setSearchValue$ = this.actions$.pipe(
+    ofType(ListingActionsTypes.SetSearchValue),
+    map(() => new GetCourses())
+  );
  
   constructor(
     private actions$: Actions<ListingActionsUnion>,

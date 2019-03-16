@@ -1,7 +1,8 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { CoursesService } from '../services/courses.service';
 import { fromEvent } from 'rxjs';
-import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { SetSearchValue } from '../store/listing.actions';
 
 @Component({
   selector: 'app-search',
@@ -12,7 +13,7 @@ export class SearchComponent implements AfterViewInit {
   @ViewChild('searchInput') search: ElementRef;
   public value: string = '';
 
-  constructor(private coursesService:CoursesService) {}
+  constructor(private store: Store<any>) {}
 
   ngAfterViewInit() {
     fromEvent(this.search.nativeElement, 'input').pipe(
@@ -21,7 +22,7 @@ export class SearchComponent implements AfterViewInit {
       debounceTime(50),
       distinctUntilChanged()
     ).subscribe((value) => {
-      this.coursesService.setSearchValue(value);
+      this.store.dispatch(new SetSearchValue({value}));
     });
   }
 }

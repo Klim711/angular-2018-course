@@ -6,6 +6,7 @@ export enum ListingActionsTypes {
   SetCourses = '[Listing Page] SetCourses',
   LoadMore = '[Listing Page] LoadMore',
   DeleteCourse = '[Listing Page] DeleteCourse',
+  SetSearchValue = '[Listing Page] SetSearchValue',
 }
 
 export class GetCourses implements Action {
@@ -34,7 +35,16 @@ export class DeleteCourse implements Action {
   }) {}
 }
 
+export class SetSearchValue implements Action {
+  readonly type = ListingActionsTypes.SetSearchValue;
+
+  constructor(public payload: {
+    value: string,
+  }) {}
+}
+
 export type ListingActionsUnion =
   | GetCourses
   | SetCourses
+  | SetSearchValue
   | LoadMore;

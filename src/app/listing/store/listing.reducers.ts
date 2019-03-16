@@ -29,7 +29,13 @@ export function listingReducer(
         ...state,
         pageNumber: state.pageNumber + 1,
       };
-    
+    case ListingActionsTypes.SetSearchValue:
+      return {
+        ...state,
+        pageNumber: 1,
+        search: action.payload.value,
+      };
+
     default:
       return state;
   }
