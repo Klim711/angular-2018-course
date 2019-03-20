@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { Store } from '@ngrx/store';
 import { State } from '../store/course-page.reducers';
 import { AddCourse } from '../store/course-page.actions';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-course-form',
@@ -18,12 +19,20 @@ export class CourseFormComponent implements OnInit {
   public description: string = '';
   public date: string = '';
   public length: string = '';
+  public course = this.formBuilder.group({
+    name: [''],
+    description: [''],
+    date: [''],
+    length: [''],
+    authors: [[]],
+  });
 
   constructor(
     private coursesService: CoursesService,
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store<State>
+    private store: Store<State>,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
@@ -44,19 +53,19 @@ export class CourseFormComponent implements OnInit {
   }
 
   setFormFields(course: Course) {
-    this.name = course.name;
-    this.description = course.description;
-    this.date = moment(course.date).format('YYYY-MM-DD');
-    this.length = String(course.length);
+    this.course.setValue({
+      name: course.name,
+      description: course.description,
+      date: moment(course.date).format('YYYY-MM-DD'),
+      length: String(course.length),
+      authors: [],
+    });
   }
 
   save() {
-    const content = {
-      name: this.name,
-      description: this.description,
-      date: new Date(this.date),
-      length: this.length,
-    };
+    const content = this.course.value;
+    content.date = new Date(content.date);
+
     if (this.originalCourse) {
       this.coursesService.editCourseItem(this.originalCourse.id, content)
         .subscribe(() => {
@@ -72,9 +81,12 @@ export class CourseFormComponent implements OnInit {
   }
 
   resetForm() {
-    this.name = '';
-    this.description = '';
-    this.date = '';
-    this.length = '';
+    this.course.setValue({
+      name: '',
+      description: '',
+      date: '',
+      length: '',
+      authors: [],
+    });
   }
 }

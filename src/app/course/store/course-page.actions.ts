@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { Course } from 'src/app/shared/interfaces/course.interface';
 
 export enum CoursePageActionsTypes {
   AddCourse = '[Course Form] AddCourse',
@@ -9,7 +10,7 @@ export enum CoursePageActionsTypes {
 export class AddCourse implements Action {
   readonly type = CoursePageActionsTypes.AddCourse;
 
-  constructor(public payload: Object) {}
+  constructor(public payload: Course) {}
 }
 
 export class AddCourseSuccess implements Action {
