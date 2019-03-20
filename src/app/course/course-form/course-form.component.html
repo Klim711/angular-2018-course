@@ -21,7 +21,7 @@
     <div class="duration-block">
       <input formControlName="length" name="courseDuration"
         type="number" id="courseDuration" class="form-control">
-      <span class="course-duration">{{length | courseDuration}}</span>
+      <span class="course-duration">{{course.value.length | courseDuration}}</span>
     </div>
   </div>
   <div class="form-group">
@@ -30,7 +30,7 @@
   </div>
 
   <div class="form-buttons">
-    <button (click)="save()" class="btn btn-dark save-button" type="button">Save</button>
+    <button [disabled]="course.invalid" (click)="save()" class="btn btn-dark save-button" type="button">Save</button>
     <button (click)="cancel()" class="btn btn-outline-secondary cancel-button" type="button">Cancel</button>
   </div>
 </form>

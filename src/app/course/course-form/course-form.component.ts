@@ -15,15 +15,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class CourseFormComponent implements OnInit {
   private originalCourse: Course = null;
-  public name: string = '';
-  public description: string = '';
-  public date: string = '';
-  public length: string = '';
   public course = this.formBuilder.group({
-    name: [''],
-    description: [''],
-    date: [''],
-    length: [''],
+    name: ['', [Validators.maxLength(50), Validators.required]],
+    description: ['', [Validators.maxLength(500)]],
+    date: ['', [Validators.required]],
+    length: ['', [Validators.required]],
     authors: [[]],
   });
 
