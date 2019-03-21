@@ -1,0 +1,14 @@
+:host.ng-invalid.ng-dirty input {
+  border-color: rgb(204, 10, 10);
+  color: rgb(204, 10, 10);
+}
+
+.help {
+  display: none;
+}
+
+:host.ng-invalid.ng-dirty .help {
+  display: block;
+  border-color: rgb(204, 10, 10);
+  color: rgb(204, 10, 10);
+}

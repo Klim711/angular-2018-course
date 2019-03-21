@@ -23,3 +23,8 @@ form {
 .cancel-button {
   margin-left: 20px;
 }
+
+.form-control.ng-dirty.ng-invalid {
+  border-color: rgb(204, 10, 10);
+  color: rgb(204, 10, 10);
+}

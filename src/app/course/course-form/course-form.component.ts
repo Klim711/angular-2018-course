@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { FormBuilder, Validators } from '@angular/forms';
+
+import * as moment from 'moment';
+
 import { CoursesService } from 'src/app/listing/services/courses.service';
 import { Course } from 'src/app/shared/interfaces/course.interface';
-import * as moment from 'moment';
-import { Store } from '@ngrx/store';
-import { State } from '../store/course-page.reducers';
 import { AddCourse } from '../store/course-page.actions';
-import { FormBuilder, Validators } from '@angular/forms';
+import { State } from '../store/course-page.reducers';
+import { dateFormatValidator } from '../directives/date-format.directive';
 
 @Component({
   selector: 'app-course-form',
@@ -18,7 +21,7 @@ export class CourseFormComponent implements OnInit {
   public course = this.formBuilder.group({
     name: ['', [Validators.maxLength(50), Validators.required]],
     description: ['', [Validators.maxLength(500)]],
-    date: ['', [Validators.required]],
+    date: ['', [Validators.required, dateFormatValidator]],
     length: ['', [Validators.required]],
     authors: [[]],
   });
