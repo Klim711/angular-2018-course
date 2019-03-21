@@ -52,7 +52,7 @@ export class CourseFormComponent implements OnInit {
     this.course.setValue({
       name: course.name,
       description: course.description,
-      date: moment(course.date).format('YYYY-MM-DD'),
+      date: moment(course.date).format('DD-MM-YYYY'),
       length: String(course.length),
       authors: [],
     });

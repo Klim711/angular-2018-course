@@ -9,13 +9,7 @@
     <textarea formControlName="description" name="courseDescription"
       class="form-control" id="courseDescription" rows="4"></textarea>
   </div>
-  <div class="form-group">
-    <label for="courseDate">Date</label>
-    <div class="date-block">
-      <input formControlName="date" name="courseDate"
-        type="date" id="courseDate" class="form-control">
-    </div>
-  </div>
+  <app-course-date formControlName="date"></app-course-date>
   <div class="form-group">
     <label for="courseDuration">Duration</label>
     <div class="duration-block">

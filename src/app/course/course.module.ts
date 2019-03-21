@@ -8,11 +8,13 @@ import { StoreModule } from '@ngrx/store';
 import { coursePageReducer } from './store/course-page.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { CoursePageEffects } from './store/course-page.effects';
+import { CourseDateComponent } from './course-date/course-date.component';
 
 @NgModule({
   declarations: [
     CoursePageComponent,
     CourseFormComponent,
+    CourseDateComponent,
   ],
   imports: [
     CommonModule,
