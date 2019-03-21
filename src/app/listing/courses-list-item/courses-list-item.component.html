@@ -5,7 +5,7 @@
       <span *ngIf="courseItem.isTopRated"><i class="far fa-star"></i></span>
     </div>
     <span class="course-duration">{{courseItem.length | courseDuration}}</span>
-    <span class="course-date">{{courseItem.date  | date:"MM.dd.yyyy"}}</span>
+    <span class="course-date">{{courseItem.date  | date:"MM/dd/yyyy"}}</span>
   </div>
   <div class="card-body">
     <p class="course-description">{{courseItem.description}}</p>
