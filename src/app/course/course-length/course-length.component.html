@@ -1,0 +1,8 @@
+<div class="form-group">
+  <label for="courseLength">Duration</label>
+  <div class="duration-block">
+    <input (change)=onChange() [(ngModel)]="value" name="courseLength"
+      type="number" id="courseLength" class="form-control">
+    <span class="course-duration">{{value | courseDuration}}</span>
+  </div>
+</div>

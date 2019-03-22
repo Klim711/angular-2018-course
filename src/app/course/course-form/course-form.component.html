@@ -10,14 +10,7 @@
       class="form-control" id="courseDescription" rows="4"></textarea>
   </div>
   <app-course-date formControlName="date"></app-course-date>
-  <div class="form-group">
-    <label for="courseDuration">Duration</label>
-    <div class="duration-block">
-      <input formControlName="length" name="courseDuration"
-        type="number" id="courseDuration" class="form-control">
-      <span class="course-duration">{{course.value.length | courseDuration}}</span>
-    </div>
-  </div>
+  <app-course-length formControlName="length"></app-course-length>
   <div class="form-group">
     <label for="courseAuthors">Authors</label>
     <input type="text" id="courseAuthors" class="form-control">

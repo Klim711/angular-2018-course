@@ -1,0 +1,9 @@
+.date-block input,
+.duration-block input {
+  display: inline-block;
+  width: 20%;
+}
+
+.course-duration {
+  margin-left: 20px;
+}

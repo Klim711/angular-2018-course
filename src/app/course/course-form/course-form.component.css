@@ -2,16 +2,6 @@ form {
   margin-top: 20px;
 }
 
-.date-block input,
-.duration-block input {
-  display: inline-block;
-  width: 20%;
-}
-
-.course-duration {
-  margin-left: 20px;
-}
-
 .form-buttons {
   margin-top: 30px;
 }
