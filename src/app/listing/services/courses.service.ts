@@ -12,12 +12,7 @@ export class CoursesService {
   public coursesListUpdated:EventEmitter<any> = new EventEmitter();
   public searchValueUpdated:EventEmitter<any> = new EventEmitter();
 
-  constructor(private http: HttpClient) {
-    this.initPageNumber();
-  }
-
-  private initPageNumber() {
-  }
+  constructor(private http: HttpClient) {}
 
   public getCoursesList(
     pageNumber:number,
