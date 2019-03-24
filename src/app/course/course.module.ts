@@ -10,6 +10,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { CoursePageEffects } from './store/course-page.effects';
 import { CourseDateComponent } from './course-date/course-date.component';
 import { CourseLengthComponent } from './course-length/course-length.component';
+import { CourseAuthorsComponent } from './course-authors/course-authors.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CourseLengthComponent } from './course-length/course-length.component';
     CourseFormComponent,
     CourseDateComponent,
     CourseLengthComponent,
+    CourseAuthorsComponent,
   ],
   imports: [
     CommonModule,
