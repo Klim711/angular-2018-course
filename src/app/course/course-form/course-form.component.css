@@ -14,7 +14,7 @@ form {
   margin-left: 20px;
 }
 
-.form-control.ng-dirty.ng-invalid {
+.form-control.ng-touched.ng-invalid {
   border-color: rgb(204, 10, 10);
   color: rgb(204, 10, 10);
 }

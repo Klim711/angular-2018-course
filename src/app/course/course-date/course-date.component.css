@@ -1,4 +1,4 @@
-:host.ng-invalid.ng-dirty input {
+:host.ng-invalid.ng-touched input {
   border-color: rgb(204, 10, 10);
   color: rgb(204, 10, 10);
 }
@@ -7,7 +7,7 @@
   display: none;
 }
 
-:host.ng-invalid.ng-dirty .help {
+:host.ng-invalid.ng-touched .help {
   display: block;
   border-color: rgb(204, 10, 10);
   color: rgb(204, 10, 10);
