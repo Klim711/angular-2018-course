@@ -24,14 +24,21 @@ export class CourseAuthorsComponent implements ControlValueAccessor {
 
   writeValue(value: any) {
     if (value !== undefined) {
-      this.updateAuthors(value);
+      this.authors = value;
     }
   }
 
-  propagateChange = (_: any) => {};
+  onChange = (_: any) => {};
+
 
   registerOnChange(fn) {
-    this.propagateChange = fn;
+    this.onChange = fn;
+  }
+
+  onTouched = () => {};
+
+  registerOnTouched(fn) {
+    this.onTouched = fn;
   }
 
   onFocus() {
@@ -43,7 +50,8 @@ export class CourseAuthorsComponent implements ControlValueAccessor {
 
   updateAuthors(newAuthors: Author[]) {
     this.authors = newAuthors;
-    this.propagateChange(this.authors);
+    this.onChange(this.authors);
+    this.onTouched();
   }
 
   onSelect(authorId: string) {
@@ -74,6 +82,4 @@ export class CourseAuthorsComponent implements ControlValueAccessor {
       this.authorsSuggestions = [];
     }
   }
-
-  registerOnTouched() {}
 }

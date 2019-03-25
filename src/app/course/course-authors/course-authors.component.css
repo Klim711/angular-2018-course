@@ -1,3 +1,8 @@
+:host.ng-touched.ng-invalid .authors-wrapper {
+  border-color: rgb(204, 10, 10);
+  color: rgb(204, 10, 10);
+}
+
 .authors-wrapper {
   display: flex;
 }
