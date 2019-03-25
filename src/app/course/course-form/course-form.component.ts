@@ -10,6 +10,7 @@ import { Course } from 'src/app/shared/interfaces/course.interface';
 import { AddCourse } from '../store/course-page.actions';
 import { State } from '../store/course-page.reducers';
 import { dateFormatValidator } from '../directives/date-format.directive';
+import { arrayLengthValidator } from '../directives/authors-length.directive';
 
 @Component({
   selector: 'app-course-form',
@@ -23,7 +24,7 @@ export class CourseFormComponent implements OnInit {
     description: ['', [Validators.maxLength(500)]],
     date: ['', [Validators.required, dateFormatValidator]],
     length: ['', [Validators.required]],
-    authors: [[]],
+    authors: [[], [arrayLengthValidator(1)]],
   });
 
   constructor(
@@ -57,7 +58,7 @@ export class CourseFormComponent implements OnInit {
       description: course.description,
       date: moment(course.date).format('DD/MM/YYYY'),
       length: String(course.length),
-      authors: [],
+      authors: course.authors,
     });
   }
 
