@@ -21,7 +21,7 @@ export class CourseFormComponent implements OnInit {
   private originalCourse: Course = null;
   public course = this.formBuilder.group({
     name: ['', [Validators.maxLength(50), Validators.required]],
-    description: ['', [Validators.maxLength(500)]],
+    description: ['', [Validators.required, Validators.maxLength(500)]],
     date: ['', [Validators.required, dateFormatValidator]],
     length: ['', [Validators.required]],
     authors: [[], [arrayLengthValidator(1)]],
