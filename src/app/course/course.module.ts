@@ -11,6 +11,7 @@ import { CoursePageEffects } from './store/course-page.effects';
 import { CourseDateComponent } from './course-date/course-date.component';
 import { CourseLengthComponent } from './course-length/course-length.component';
 import { CourseAuthorsComponent } from './course-authors/course-authors.component';
+import { CourseAuthorsSuggestionsComponent } from './course-authors-suggestions/course-authors-suggestions.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CourseAuthorsComponent } from './course-authors/course-authors.componen
     CourseDateComponent,
     CourseLengthComponent,
     CourseAuthorsComponent,
+    CourseAuthorsSuggestionsComponent,
   ],
   imports: [
     CommonModule,

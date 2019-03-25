@@ -13,6 +13,6 @@ export class AuthorsService {
   constructor(private http: HttpClient) {}
 
   public getAuthors(searchValue: string = ''):Observable<Author[]> {
-    return this.http.get<Author[]>(`${AUTHORS_SOURCE}?name=${searchValue}`);
+    return this.http.get<Author[]>(`${AUTHORS_SOURCE}`);
   }
 }

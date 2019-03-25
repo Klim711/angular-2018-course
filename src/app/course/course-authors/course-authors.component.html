@@ -1,4 +1,16 @@
 <div class="form-group">
   <label for="courseAuthors">Authors</label>
-  <input (change)=onChange() [(ngModel)]="searchValue" type="text" id="courseAuthors" class="form-control">
+  <div>
+    <span *ngFor="let item of authors">{{item.name}}</span>
+  </div>
+  <input
+      (focus)="onFocus()"
+      type="text"
+      id="courseAuthors"
+      class="form-control"
+      autocomplete="off">
+  <app-course-authors-suggestions
+      [suggestions]="authorsSuggestions"
+      (select)="onSelect($event)"
+      ></app-course-authors-suggestions>
 </div>

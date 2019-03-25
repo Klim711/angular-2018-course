@@ -1,0 +1,8 @@
+<ul class="list-group list-group-flush"
+    *ngIf="suggestions.length">
+  <li class="list-group-item"
+      *ngFor="let item of suggestions"
+      (click)="select.emit(item.id)">
+    {{item.name}}
+  </li>
+</ul>

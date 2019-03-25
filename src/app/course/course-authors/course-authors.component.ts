@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, OnInit, forwardRef, HostListener, ElementRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AuthorsService } from '../services/authors.service';
 import { Author } from '../interfaces/author.interface';
@@ -15,15 +15,16 @@ import { Author } from '../interfaces/author.interface';
 })
 export class CourseAuthorsComponent implements ControlValueAccessor {
   public authors: Author[] = [];
-  public searchValue: string = '';
   public authorsSuggestions: Author[] = [];
 
-  constructor(private authorsService: AuthorsService) {}
+  constructor(
+    private authorsService: AuthorsService,
+    private eRef: ElementRef
+  ) {}
 
   writeValue(value: any) {
     if (value !== undefined) {
-      this.authors = value;
-      this.propagateChange(this.authors);
+      this.updateAuthors(value);
     }
   }
 
@@ -33,12 +34,35 @@ export class CourseAuthorsComponent implements ControlValueAccessor {
     this.propagateChange = fn;
   }
 
-  onChange() {
-    this.authorsService.getAuthors(this.searchValue)
+  onFocus() {
+    this.authorsService.getAuthors()
       .subscribe((authors: Author[]) => {
         this.authorsSuggestions = authors;
       });
-    // this.propagateChange(this.authors);
+  }
+
+  updateAuthors(newAuthors: Author[]) {
+    this.authors = newAuthors;
+    this.propagateChange(this.authors);
+  }
+
+  onSelect(authorId: string) {
+    const selectedAuthor = this.authorsSuggestions
+      .find((author) => author.id === authorId);
+
+    this.updateAuthors([
+      ...this.authors,
+      selectedAuthor,
+    ]);
+
+    this.authorsSuggestions = [];
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout (event) {
+    if (!this.eRef.nativeElement.contains(event.target)) {
+      this.authorsSuggestions = [];
+    }
   }
 
   registerOnTouched() {}
