@@ -2,5 +2,7 @@
   <span class="badge badge-dark"
       *ngFor="let author of authors">
     {{author.name}}
+    <i class="fas fa-times-circle"
+      (click)="delete.emit(author.id)"></i>
   </span>
 </div>

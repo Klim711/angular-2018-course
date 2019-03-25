@@ -1,7 +1,9 @@
 <div class="form-group">
   <label for="courseAuthors">Authors</label>
   <div class="form-control authors-wrapper">
-    <app-authors-list [authors]="authors"></app-authors-list>
+    <app-authors-list
+        [authors]="authors"
+        (delete)="onDelete($event)"></app-authors-list>
     <input class="authors-input"
       (focus)="onFocus()"
       type="text"

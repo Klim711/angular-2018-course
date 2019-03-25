@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Author } from 'src/app/course/interfaces/author.interface';
 
 @Component({
@@ -8,6 +8,7 @@ import { Author } from 'src/app/course/interfaces/author.interface';
 })
 export class AuthorsListComponent implements OnInit {
   @Input() public authors: Author[] = [];
+  @Output() public delete: EventEmitter<string> =  new EventEmitter();
 
   constructor() { }
 

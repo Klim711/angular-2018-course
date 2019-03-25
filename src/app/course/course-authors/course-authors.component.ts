@@ -58,6 +58,16 @@ export class CourseAuthorsComponent implements ControlValueAccessor {
     this.authorsSuggestions = [];
   }
 
+  onDelete(authorId: string) {
+    const selectedAuthorIndex = this.authors
+      .findIndex((author) => author.id === authorId);
+
+    this.updateAuthors([
+      ...this.authors.slice(0, selectedAuthorIndex),
+      ...this.authors.slice(selectedAuthorIndex + 1),
+    ]);
+  }
+
   @HostListener('document:click', ['$event'])
   clickout (event) {
     if (!this.eRef.nativeElement.contains(event.target)) {
