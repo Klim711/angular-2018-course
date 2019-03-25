@@ -17,19 +17,24 @@ export class CourseLengthComponent implements ControlValueAccessor {
   writeValue(value: any) {
     if (value !== undefined) {
       this.value = value;
-      this.propagateChange(this.value);
+      this.onChange(this.value);
     }
   }
 
-  propagateChange = (_: any) => {};
+  onChange = (_: any) => {};
 
   registerOnChange(fn) {
-    this.propagateChange = fn;
+    this.onChange = fn;
   }
 
-  onChange() {
-    this.propagateChange(this.value);
+  onTouched = () => {};
+
+  registerOnTouched(fn) {
+    this.onTouched = fn;
   }
 
-  registerOnTouched() {}
+  onLengthChange() {
+    this.onChange(this.value);
+    this.onTouched();
+  }
 }
