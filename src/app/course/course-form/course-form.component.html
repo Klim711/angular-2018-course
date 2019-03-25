@@ -11,7 +11,7 @@
   </div>
   <app-course-date formControlName="date"></app-course-date>
   <app-course-length formControlName="length"></app-course-length>
-  <app-course-authors></app-course-authors>
+  <app-course-authors formControlName="authors"></app-course-authors>
   <div class="form-buttons">
     <button [disabled]="course.invalid" (click)="save()" class="btn btn-dark save-button" type="button">Save</button>
     <button (click)="cancel()" class="btn btn-outline-secondary cancel-button" type="button">Cancel</button>
