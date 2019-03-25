@@ -1,0 +1,12 @@
+.authors-wrapper {
+  display: flex;
+}
+
+.authors-input {
+  border: none;
+  flex: 1;
+}
+
+.authors-input:focus {
+  outline: none;
+}

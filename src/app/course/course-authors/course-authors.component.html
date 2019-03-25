@@ -1,14 +1,14 @@
 <div class="form-group">
   <label for="courseAuthors">Authors</label>
-  <div>
-    <span *ngFor="let item of authors">{{item.name}}</span>
-  </div>
-  <input
+  <div class="form-control authors-wrapper">
+    <app-authors-list [authors]="authors"></app-authors-list>
+    <input class="authors-input"
       (focus)="onFocus()"
       type="text"
       id="courseAuthors"
-      class="form-control"
       autocomplete="off">
+  </div>
+
   <app-course-authors-suggestions
       [suggestions]="authorsSuggestions"
       (select)="onSelect($event)"

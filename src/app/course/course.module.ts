@@ -12,6 +12,7 @@ import { CourseDateComponent } from './course-date/course-date.component';
 import { CourseLengthComponent } from './course-length/course-length.component';
 import { CourseAuthorsComponent } from './course-authors/course-authors.component';
 import { CourseAuthorsSuggestionsComponent } from './course-authors-suggestions/course-authors-suggestions.component';
+import { AuthorsListComponent } from './authors-list/authors-list.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { CourseAuthorsSuggestionsComponent } from './course-authors-suggestions/
     CourseLengthComponent,
     CourseAuthorsComponent,
     CourseAuthorsSuggestionsComponent,
+    AuthorsListComponent,
   ],
   imports: [
     CommonModule,

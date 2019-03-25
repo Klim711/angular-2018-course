@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef, HostListener, ElementRef } from '@angular/core';
+import { Component, forwardRef, HostListener, ElementRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AuthorsService } from '../services/authors.service';
 import { Author } from '../interfaces/author.interface';
