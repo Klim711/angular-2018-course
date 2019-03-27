@@ -4,6 +4,10 @@ import { CoursePageComponent } from './course-page/course-page.component';
 import { CourseFormComponent } from './course-form/course-form.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import { coursePageReducer } from './store/course-page.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { CoursePageEffects } from './store/course-page.effects';
 
 @NgModule({
   declarations: [
@@ -14,6 +18,8 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     FormsModule,
     SharedModule,
+    StoreModule.forFeature('coursePage', coursePageReducer),
+    EffectsModule.forFeature([CoursePageEffects]),
   ],
   exports: [CoursePageComponent],
 })

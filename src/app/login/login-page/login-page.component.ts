@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { State } from '../store/login-page.reducers';
+import { SetReturnPage, Login } from '../store/login-page.actions';
 
 @Component({
   selector: 'app-login-page',
@@ -8,12 +11,11 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
-  private return: string;
-
   constructor(
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
+    private store: Store<State>
   ) {}
 
   ngOnInit() {
@@ -21,13 +23,11 @@ export class LoginPageComponent implements OnInit {
       this.router.navigate(['/listing']);
     }
     this.route.queryParams.subscribe((params) => {
-      this.return = params.return || '/listing';
+      this.store.dispatch(new SetReturnPage(params.return || '/listing'));
     });
   }
 
   logIn(credentials: {email: string, password:string}) {
-    this.authService.logIn(credentials).subscribe(() => {
-      this.router.navigate([this.return]);
-    });
+    this.store.dispatch(new Login(credentials));
   }
 }

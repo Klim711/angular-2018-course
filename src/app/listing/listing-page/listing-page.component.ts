@@ -1,6 +1,8 @@
 import { Course } from '../../shared/interfaces/course.interface';
 import { Component, OnInit } from '@angular/core';
-import { CoursesService } from '../services/courses.service';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { GetCourses, LoadMore, DeleteCourse } from '../store/listing.actions';
 
 @Component({
   selector: 'app-listing-page',
@@ -8,40 +10,25 @@ import { CoursesService } from '../services/courses.service';
   styleUrls: ['./listing-page.component.css'],
 })
 export class ListingPageComponent implements OnInit {
+  public courses$: Observable<Course[]>;
   public courses: Course[] = [];
   public pageSize: number = 10;
   public pageNumber: number = 1;
-  private searchValue: string = '';
 
-  constructor(private coursesService: CoursesService) { }
+  constructor(private store: Store<any>) { }
 
   ngOnInit() {
-    this.getCoursesList();
-    this.coursesService.searchValueUpdated.subscribe((value) => {
-      this.searchValue = value || '';
-      this.pageNumber = 1;
-      this.getCoursesList();
-    });
-  }
-
-  getCoursesList() {
-    this.coursesService
-      .getCoursesList(this.pageNumber, this.pageSize, this.searchValue)
-      .subscribe((data) => {
-        this.courses = [
-          ...data,
-        ];
-      });
+    this.store.dispatch(new GetCourses());
+    this.courses$ = this.store.pipe(
+      select((state) => state.listing.courses)
+    );
   }
 
   deleteCourse(courseId: number) {
-    this.coursesService.deleteCourse(courseId).subscribe(() => {
-      this.getCoursesList();
-    });
+    this.store.dispatch(new DeleteCourse({id: courseId}));
   }
 
   loadMore() {
-    this.pageNumber++;
-    this.getCoursesList();
+    this.store.dispatch(new LoadMore());
   }
 }
