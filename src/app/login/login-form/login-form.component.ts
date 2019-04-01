@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-login-form',
@@ -7,26 +8,20 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class LoginFormComponent implements OnInit {
   @Output() public logIn: EventEmitter<Object> = new EventEmitter();
-  public email: string = '';
-  public password: string = '';
+  public email: FormControl;
+  public password: FormControl;
 
   constructor() {}
 
   ngOnInit() {
-  }
-
-  onEmailKey(event: KeyboardEvent) {
-    this.email = (<HTMLInputElement>event.target).value;
-  }
-
-  onPasswordKey(event: KeyboardEvent) {
-    this.password = (<HTMLInputElement>event.target).value;
+    this.email = new FormControl();
+    this.password = new FormControl();
   }
 
   makeLogIn() {
     this.logIn.emit({
-      email: this.email,
-      password: this.password,
+      email: this.email.value,
+      password: this.password.value,
     })
   }
 }

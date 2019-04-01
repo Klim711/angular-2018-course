@@ -1,0 +1,19 @@
+:host {
+  position: absolute;
+  z-index: 1;
+}
+
+ul {
+  background-color: white;
+  margin: 10px 0;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+  width: 400px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+ul > li:hover {
+  color: #1b1e21;
+  background-color: #c6c8ca;
+}

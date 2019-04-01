@@ -1,0 +1,8 @@
+<div class="form-group">
+  <label for="courseDate">Date</label>
+  <div class="date-block">
+    <input (change)=onDateChange() [(ngModel)]="value" name="courseDate"
+      type="text" id="courseDate" class="form-control">
+    <div class="help">Date format should be DD-MM-YYYY</div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+.authors-list {
+  font-size: 1.3rem;
+  display: flex;
+}
+
+span {
+  margin-right: 10px;
+}

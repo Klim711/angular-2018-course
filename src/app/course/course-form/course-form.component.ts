@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { FormBuilder, Validators } from '@angular/forms';
+
+import * as moment from 'moment';
+
 import { CoursesService } from 'src/app/listing/services/courses.service';
 import { Course } from 'src/app/shared/interfaces/course.interface';
-import * as moment from 'moment';
-import { Store } from '@ngrx/store';
-import { State } from '../store/course-page.reducers';
 import { AddCourse } from '../store/course-page.actions';
+import { State } from '../store/course-page.reducers';
+import { dateFormatValidator } from '../directives/date-format.directive';
+import { arrayLengthValidator } from '../directives/authors-length.directive';
 
 @Component({
   selector: 'app-course-form',
@@ -14,16 +19,20 @@ import { AddCourse } from '../store/course-page.actions';
 })
 export class CourseFormComponent implements OnInit {
   private originalCourse: Course = null;
-  public name: string = '';
-  public description: string = '';
-  public date: string = '';
-  public length: string = '';
+  public course = this.formBuilder.group({
+    name: ['', [Validators.maxLength(50), Validators.required]],
+    description: ['', [Validators.required, Validators.maxLength(500)]],
+    date: ['', [Validators.required, dateFormatValidator]],
+    length: ['', [Validators.required]],
+    authors: [[], [arrayLengthValidator(1)]],
+  });
 
   constructor(
     private coursesService: CoursesService,
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store<State>
+    private store: Store<State>,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
@@ -44,19 +53,19 @@ export class CourseFormComponent implements OnInit {
   }
 
   setFormFields(course: Course) {
-    this.name = course.name;
-    this.description = course.description;
-    this.date = moment(course.date).format('YYYY-MM-DD');
-    this.length = String(course.length);
+    this.course.setValue({
+      name: course.name,
+      description: course.description,
+      date: moment(course.date).format('DD/MM/YYYY'),
+      length: String(course.length),
+      authors: course.authors,
+    });
   }
 
   save() {
-    const content = {
-      name: this.name,
-      description: this.description,
-      date: new Date(this.date),
-      length: this.length,
-    };
+    const content = this.course.value;
+    content.date = new Date(content.date);
+
     if (this.originalCourse) {
       this.coursesService.editCourseItem(this.originalCourse.id, content)
         .subscribe(() => {
@@ -72,9 +81,12 @@ export class CourseFormComponent implements OnInit {
   }
 
   resetForm() {
-    this.name = '';
-    this.description = '';
-    this.date = '';
-    this.length = '';
+    this.course.setValue({
+      name: '',
+      description: '',
+      date: '',
+      length: '',
+      authors: [],
+    });
   }
 }

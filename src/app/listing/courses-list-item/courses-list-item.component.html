@@ -5,10 +5,19 @@
       <span *ngIf="courseItem.isTopRated"><i class="far fa-star"></i></span>
     </div>
     <span class="course-duration">{{courseItem.length | courseDuration}}</span>
-    <span class="course-date">{{courseItem.date  | date:"MM.dd.yyyy"}}</span>
+    <span class="course-date">{{courseItem.date  | date:"MM/dd/yyyy"}}</span>
   </div>
   <div class="card-body">
-    <p class="course-description">{{courseItem.description}}</p>
+    <div class="course-text">
+      <p class="course-description">{{courseItem.description}}</p>
+      <div class="authors-list">
+          <span class="badge badge-dark"
+              *ngFor="let author of courseItem.authors">
+            <span *ngIf="author.name">{{author.name}}</span>
+            <span *ngIf="!author.name">{{author.firstName}} {{author.lastName}}</span>
+          </span>
+      </div>
+    </div>
     <div class="course-buttons">
       <button (click)="editCourse()" type="button" class="btn btn-outline-dark edit-button btn-sm">Edit</button>
       <button (click)="deleteCourse()" class="btn btn-dark delete-button btn-sm">Delete</button>

@@ -1,0 +1,18 @@
+<div class="form-group">
+  <label for="courseAuthors">Authors</label>
+  <div class="form-control authors-wrapper">
+    <app-authors-list
+        [authors]="authors"
+        (delete)="onDelete($event)"></app-authors-list>
+    <input class="authors-input"
+      (focus)="onFocus()"
+      type="text"
+      id="courseAuthors"
+      autocomplete="off">
+  </div>
+
+  <app-course-authors-suggestions
+      [suggestions]="authorsSuggestions"
+      (select)="onSelect($event)"
+      ></app-course-authors-suggestions>
+</div>

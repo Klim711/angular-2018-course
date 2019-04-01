@@ -1,12 +1,12 @@
 <form>
   <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input (keyup)="onEmailKey($event)" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <label for="#emailInput">Email address</label>
+    <input [formControl]="email" type="text" class="form-control" id="#emailInput" aria-describedby="emailHelp" placeholder="Enter email">
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input (keyup)="onPasswordKey($event)" (keyup.enter)="makeLogIn()" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <label for="#passwordInput">Password</label>
+    <input [formControl]="password" (keyup.enter)="makeLogIn()" type="password" class="form-control" id="#passwordInput" placeholder="Password">
   </div>
   <button (click)="makeLogIn()" type="button" class="btn btn-outline-dark">Login</button>
 </form>

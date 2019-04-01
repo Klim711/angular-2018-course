@@ -25,7 +25,7 @@
   font-style: italic;
 }
 
-.course-description {
+.course-text {
   flex: 1;
 }
 
@@ -37,4 +37,12 @@
 
 .edit-button {
   margin-bottom: 10px;
+}
+
+.authors-list {
+  font-size: 1.3rem;
+}
+
+.authors-list .badge-dark {
+  margin-right: 10px;
 }

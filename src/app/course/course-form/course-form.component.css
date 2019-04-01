@@ -2,16 +2,6 @@ form {
   margin-top: 20px;
 }
 
-.date-block input,
-.duration-block input {
-  display: inline-block;
-  width: 20%;
-}
-
-.course-duration {
-  margin-left: 20px;
-}
-
 .form-buttons {
   margin-top: 30px;
 }
@@ -22,4 +12,9 @@ form {
 
 .cancel-button {
   margin-left: 20px;
+}
+
+.form-control.ng-touched.ng-invalid {
+  border-color: rgb(204, 10, 10);
+  color: rgb(204, 10, 10);
 }
